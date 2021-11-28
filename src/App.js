@@ -9,8 +9,8 @@ function App() {
     <div className="App">
       Projet DA50 - Front
       <div>
-          <Route exact path='/read' component={Read} />
-        </div>
+        
+      </div>
     </div>
   );
 }
