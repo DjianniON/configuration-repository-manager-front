@@ -1,6 +1,9 @@
 import React from 'react';
-import { Table } from 'semantic-ui-react'
+import { Button, Table } from 'semantic-ui-react'
 export default function Read() {
+    const setData = (data) => {
+        console.log(data);
+    }
     return (
         <div>
             <Table singleLine>
@@ -17,6 +20,11 @@ export default function Read() {
                         <Table.Cell>Oui</Table.Cell>
                     </Table.Row>
                 </Table.Body>
+
+                <Table.HeaderCell>Update</Table.HeaderCell>
+                <Table.Cell> 
+                    <Button onClick={() => setData()}>Update</Button>
+                </Table.Cell>
             </Table>
         </div>
     )
