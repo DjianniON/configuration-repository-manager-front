@@ -1,18 +1,21 @@
 import logo from './logo.svg';
 import './App.css';
-import Read from './components/read';
+import ReadList from './components/readList';
+import { Header, Container } from 'semantic-ui-react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-
 
 function App() {
   return (
+    <Router>
     <div className="App">
-      Projet DA50 - Front
-      <div>
-        
-      </div>
+    <Header as='h1' textAlign='center' content='Container' />
+    <Container>
+    <ReadList />
+    </Container>
     </div>
-  );
-}
-
-export default App;
+    </Router>
+    );
+  }
+  
+  export default App;
+  
