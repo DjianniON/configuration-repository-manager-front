@@ -1,8 +1,10 @@
 import logo from './logo.svg';
 import './App.css';
-import Create from './components/create';
-import Read from './components/read';
-import Update from './components/update';
+import CreateConfig from './components/createConfig';
+import CreateObject from './components/createObjet';
+import ReadRef from './components/readRef';
+import ReadObjet from './components/readObjet';
+import UpdateConfig from './components/updateConfig';
 import { BrowserRouter, BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 
@@ -12,12 +14,18 @@ function App() {
     <div className="App">
     <h2 className="main-header">Projet DA50 - Front</h2>
       <div>
-          <Create/>
+          <CreateConfig/>
       </div>
       <div style={{ marginTop: 20 }}>
-          <Read/>
+          <ReadRef/>
       </div>
-        <Update/>
+        <UpdateConfig/>
+    </div>
+    <div>
+      <CreateObject/> 
+    </div>
+    <div>
+      <ReadObjet/>
     </div>
   </Router>
   );

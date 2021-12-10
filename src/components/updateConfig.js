@@ -3,10 +3,10 @@ import { Button, Form, Container } from 'semantic-ui-react';
 
 export default function Update() {
     const [configuration, setConfiguration] = useState('');
-    const [test, setTest] = useState('');
+    const [description, setDescription] = useState('');
     useEffect(() => {
         setConfiguration(localStorage.getItem('configuration'));
-        setTest(localStorage.getItem('test'));
+        setDescription(localStorage.getItem('description'));
     }, []);
     return (
         <div>
@@ -17,8 +17,8 @@ export default function Update() {
                     <input placeholder='Configuration' value={configuration} onChange={(e) => setConfiguration(e.target.value)}/>
                 </Form.Field>
                 <Form.Field>
-                    <label>Test</label>
-                    <input placeholder='Test' value={test} onChange={(e) => setTest(e.target.value)}/>
+                    <label>Description</label>
+                    <input placeholder='Dkescription' value={description} onChange={(e) => setDescription(e.target.value)}/>
                 </Form.Field>
                 <Button type='annuler' color='red'>Annuler</Button>
                 <Button type='submit'>Update</Button>

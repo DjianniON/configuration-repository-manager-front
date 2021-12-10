@@ -13,7 +13,6 @@ export default function Read() {
                 <Table.Header>
                     <Table.Row>
                         <Table.HeaderCell>Configuration</Table.HeaderCell>
-                        <Table.HeaderCell>Test</Table.HeaderCell>
                         <Table.HeaderCell>Read</Table.HeaderCell>
                         <Table.HeaderCell>Update</Table.HeaderCell>
                         <Table.HeaderCell>Delete</Table.HeaderCell>
@@ -23,7 +22,6 @@ export default function Read() {
                 <Table.Body>
                     <Table.Row>
                         <Table.Cell>Configuration</Table.Cell>
-                        <Table.Cell>Oui</Table.Cell>
                         <Table.Cell>
                             <Button>Read</Button>
                         </Table.Cell>
@@ -36,6 +34,7 @@ export default function Read() {
                     </Table.Row>
                 </Table.Body>
             </Table>
+            <Button type='creer'>Nouvelle configuration</Button>
             </Container>
         </div>
     )
