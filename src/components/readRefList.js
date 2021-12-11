@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Table, Icon, Container, Button } from 'semantic-ui-react';
 import axios from 'axios';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 export default function ReadList() {
-    let params = useParams();
-    let referentiel = parseInt(params.id, 10);
     const [APIData, setAPIData] = useState([]);
-    //TODO: remettre /${referentiel}
     useEffect(() => {
         axios.get(`http://localhost:8080/api/v1/configurations`, {
             headers: {
@@ -21,7 +18,7 @@ export default function ReadList() {
     }, [])
 
     const getData = () => {
-        axios.get(`http://localhost:8080/api/v1/configurations}`, {
+        axios.get(`http://localhost:8080/api/v1/configurations`, {
             headers: {
                 "Content-type": "application/json"
             }
@@ -39,6 +36,11 @@ export default function ReadList() {
         })*/
     }
 
+
+    const editReferentiel = (id) => {
+        console.log("Export " + id);
+    }
+
     const exportConfiguration = (id) => {
         console.log("Export " + id);
     }
@@ -48,7 +50,7 @@ export default function ReadList() {
             <Table singleLine>
                 <Table.Header>
                     <Table.Row>
-                        <Table.HeaderCell>Nom de la configuration</Table.HeaderCell>
+                        <Table.HeaderCell>Nom du référentiel</Table.HeaderCell>
                         <Table.HeaderCell>Voir</Table.HeaderCell>
                         <Table.HeaderCell>Editer</Table.HeaderCell>
                         <Table.HeaderCell>Exporter</Table.HeaderCell>
@@ -56,33 +58,33 @@ export default function ReadList() {
                     </Table.Row>
                 </Table.Header>
                 <Table.Body>
-                    {APIData.map((configuration) => {
+                    {APIData.map((referentiel) => {
                         return (
                             <Table.Row>
-                                <Table.Cell>{configuration.nom}</Table.Cell>
+                                <Table.Cell>{referentiel.nom}</Table.Cell>
                                 <Table.Cell>
                                     <Link
-                                        to={`configurations/${configuration.id}`}
-                                        key={configuration.id}
+                                        to={`/${referentiel.id}`}
+                                        key={referentiel.id}
                                     >
                                         <Icon link name='eye' />
                                     </Link>
                                 </Table.Cell>
                                 <Table.Cell>
                                     <Link
-                                        to={`configurations/${configuration.id}/edit`}
-                                        key={configuration.id}
+                                        to={`/${referentiel.id}`}
+                                        key={referentiel.id}
                                     >
                                         <Icon link name='edit' />
                                     </Link>
                                 </Table.Cell>
                                 <Table.Cell>
-                                    <span onClick={() => exportConfiguration(configuration.id)}>
+                                    <span onClick={() => exportConfiguration(referentiel.id)}>
                                         <Icon link name='download' />
                                     </span>
                                 </Table.Cell>
                                 <Table.Cell>
-                                    <span onClick={() => deleteConfiguration(configuration.id)}>
+                                    <span onClick={() => deleteConfiguration(referentiel.id)}>
                                         <Icon link name='close' />
                                     </span>
                                 </Table.Cell>
