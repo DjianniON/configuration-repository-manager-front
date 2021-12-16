@@ -1,28 +1,27 @@
 import React, { useState } from 'react'
 import { Button, Checkbox, Container, Form } from 'semantic-ui-react'
-import { Link } from 'react-router-dom';
 
 export default function Create() {
-    const [configuration, setConfiguration] = useState('');
+    const [objet, setObjet] = useState('');
     const [description, setDescription] = useState('');
-    const postData = () => {
-        console.log(configuration);
-        console.log(description);
-    }
+    useEffect(() => {
+        setObjet(localStorage.getItem('objet'));
+        setDescription(localStorage.getItem('description'));
+    }, []);
     return (
         <div>
             <Container>
                 <Form className="create-form">
                     <Form.Field>
-                        <label>Nom de la configuration</label>
-                        <input placeholder='Configuration' onChange={(e) => setConfiguration(e.target.value)} />
+                        <label>Nom de l'objet</label>
+                        <input placeholder='Objet' onChange={(e) => setObjet(e.target.value)} />
                     </Form.Field>
                     <Form.Field>
                         <label>Description</label>
                         <input placeholder='Description' onChange={(e) => setDescription(e.target.value)} />
                     </Form.Field>
-                    <Link to="/ReadRefList"><Button type='creer' color='green'>Créer</Button></Link>
-                    <Link to="/ReadRefList"><Button type='annuler' color='red'>Annuler</Button></Link>
+                    <Link to="/readObjetList"></Link><Button type='update' color='green'>Mettre à jour</Button></Link>
+                    <Link to="/readObjetList"><Button type='annuler' color='red'>Annuler</Button></Link>
                 </Form>
             </Container>
         </div>

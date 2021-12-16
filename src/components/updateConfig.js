@@ -1,5 +1,6 @@
 import React, {useEffect, useState } from 'react';
 import { Button, Form, Container } from 'semantic-ui-react';
+import {Link} from 'react-router-dom';
 
 export default function Update() {
     const [configuration, setConfiguration] = useState('');
@@ -18,10 +19,10 @@ export default function Update() {
                 </Form.Field>
                 <Form.Field>
                     <label>Description</label>
-                    <input placeholder='Dkescription' value={description} onChange={(e) => setDescription(e.target.value)}/>
+                    <input placeholder='Description' value={description} onChange={(e) => setDescription(e.target.value)}/>
                 </Form.Field>
-                <Button type='annuler' color='red'>Annuler</Button>
-                <Button type='submit'>Update</Button>
+                <Link to="/ReadRefList"><Button type='annuler' color='red'>Annuler</Button></Link>
+                <Button type='submit' color='green'>Update</Button>
                 </Container>
             </Form>
         </div>
