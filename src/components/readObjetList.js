@@ -5,10 +5,10 @@ import { Link, useParams } from 'react-router-dom';
 
 export default function ReadList() {
     let params = useParams();
-    let referentiel = parseInt(params.id, 10);
+    let objet = parseInt(params.id, 10);
     const [APIData, setAPIData] = useState([]);
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/v1/configurations/${referentiel}`, {
+        axios.get(`http://localhost:8080/api/v1/objet/${objet}`, {
             headers: {
                 "Content-type": "application/json"
             }
@@ -17,50 +17,7 @@ export default function ReadList() {
                 setAPIData(response.data);
             })
     }, [])
-
-    //TODO: changer fakeData avec APIData + routes !
-    let fakeData = [
-        {
-            "id": 0,
-            "nom": "Theme",
-            "description": "Theme de cahier",
-            "objetParent": null,
-            "objetsEnfants": null
-        },
-        {
-            "id": 4,
-            "nom": "Manuscrit",
-            "description": "Manuscrits de cahier",
-            "objetParent": null,
-            "objetsEnfants": null
-        },
-        {
-            "id": 18,
-            "nom": "Ecrire",
-            "description": "parametres d'ecriture",
-            "objetParent": null,
-            "objetsEnfants": null
-        }
-    ];
-
-    let fakeDataParam = [
-        {
-            "id": 0,
-            "nom": "ParamTest",
-            "description": "Theme de cahier",
-        },
-    ];
-
-    const getData = () => {
-        axios.get(`http://localhost:8080/api/v1/configurations/${referentiel}`, {
-            headers: {
-                "Content-type": "application/json"
-            }
-        })
-            .then((getData) => {
-                setAPIData(getData.data);
-            })
-    }
+console.log(APIData);
 
     const deleteObject = (id) => {
         console.log("delete " + id);
@@ -94,7 +51,7 @@ export default function ReadList() {
                             </Table.Header>
 
                             <Table.Body>
-                                {fakeData.map((objet) => {
+                                {APIData.objetsEnfants.map((objet) => {
                                     return (
                                         <Table.Row>
                                             <Table.Cell>{objet.nom}</Table.Cell>
@@ -142,7 +99,7 @@ export default function ReadList() {
                             </Table.Header>
 
                             <Table.Body>
-                                {fakeDataParam.map((parametre) => {
+                                {APIData.proprietes.map((parametre) => {
                                     return (
                                         <Table.Row>
                                             <Table.Cell>{parametre.nom}</Table.Cell>

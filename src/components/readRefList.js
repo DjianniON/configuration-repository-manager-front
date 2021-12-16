@@ -95,7 +95,7 @@ export default function ReadList() {
                     }
                 </Table.Body>
             </Table>
-            <Button type='creer'>Nouvelle configuration</Button>
+            <Link to="/create"><Button color='green'>Nouveau référentiel</Button></Link>
         </Container>
     )
 }

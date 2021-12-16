@@ -21,7 +21,7 @@ export default function ReadList() {
     }, [])
 
     const getData = () => {
-        axios.get(`http://localhost:8080/api/v1/configurations}`, {
+        axios.get(`http://localhost:8080/api/v1/configurations`, {
             headers: {
                 "Content-type": "application/json"
             }
@@ -93,7 +93,7 @@ export default function ReadList() {
                     }
                 </Table.Body>
             </Table>
-            <Button type='creer'>Nouvelle configuration</Button>
+            <Link to="/create"><Button color='green'>Nouvelle configuration</Button></Link>
         </Container>
     )
 }
