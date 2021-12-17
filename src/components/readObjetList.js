@@ -7,6 +7,7 @@ export default function ReadList() {
     let params = useParams();
     let objet = parseInt(params.objectId, 10);
 
+    const[ObjectName, setObjectName] = useState('');
     const[ObjectData, setObjectData] = useState([]);
     const [APIData, setAPIData] = useState([]);
     useEffect(() => {
@@ -22,18 +23,18 @@ export default function ReadList() {
                 "Content-type": "application/json"
             }
         })
-            .then((getData) => {
-                setObjectData(getData.data.proprietes);
+            .then((response) => {
+                setObjectName(response.data.nom);
+                setObjectData(response.data.proprietes);
             })
             })
     }, [])
     
  
 
-    let sections = [{ key: 'Home', content: 'Home', link: true },
-    { key: 'Store', content: 'Store', link: true },
-    { key: 'Shirt', content: 'T-Shirt', active: true },];
-    console.log(objet);
+    let sections = [{ key: '/', content: 'Test', link: true },
+    { key: 'Test', content: 'Test1', link: true },
+    { key: 'Shirt', content: ObjectName, active: true },];
 
     //TODO: faire un truc moins moche
 
@@ -109,7 +110,7 @@ export default function ReadList() {
                 </Grid.Column>
                 <Grid.Column>
                     <Container>
-                        <Header>Paramètres de l'objet</Header>
+                        <Header>Paramètres de {ObjectName}</Header>
                         <Table singleLine>
                             <Table.Header>
                                 <Table.Row>
@@ -123,7 +124,6 @@ export default function ReadList() {
                             <Table.Body>
                                 {
                                     ObjectData.map((parametre) => {
-                                        console.log(parametre.nom);
                                         return (
                                             <Table.Row>
                                                 <Table.Cell>{parametre.nom}</Table.Cell>
