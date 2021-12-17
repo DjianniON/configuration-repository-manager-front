@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Table, Icon, Container, Button } from 'semantic-ui-react';
+import { Table, Icon, Container, Button, Header } from 'semantic-ui-react';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
 
@@ -8,6 +8,7 @@ export default function ReadRootList() {
     let params = useParams();
     let configuration = parseInt(params.id, 10);
     const [APIData, setAPIData] = useState([]);
+    const [ConfigName, setConfigName] = useState('');
 
     useEffect(() => {
         axios.get(`http://localhost:8080/api/v1/configuration/${configuration}/objets`, {
@@ -17,7 +18,14 @@ export default function ReadRootList() {
         })
             .then((response) => {
                 setAPIData(response.data);
+                axios.get(`http://localhost:8080/api/v1/configuration/${configuration}`, {
+            headers: {
+                "Content-type": "application/json"
+            }
+        }).then((response) => {
+            setConfigName(response.data.nom);
             })
+        })
     }, [])
 
     const deleteObject = (id) => {
@@ -34,10 +42,11 @@ export default function ReadRootList() {
 
     return (
         <Container>
+            <Header>{ConfigName}</Header>
             <Table singleLine>
                 <Table.Header>
                     <Table.Row>
-                        <Table.HeaderCell>Nom de la configuration</Table.HeaderCell>
+                        <Table.HeaderCell>Nom de l'objet</Table.HeaderCell>
                         <Table.HeaderCell>Voir</Table.HeaderCell>
                         <Table.HeaderCell>Editer</Table.HeaderCell>
                         <Table.HeaderCell>Exporter</Table.HeaderCell>

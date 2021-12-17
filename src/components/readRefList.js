@@ -59,7 +59,7 @@ export default function ReadList() {
                                 <Table.Cell>{referentiel.nom}</Table.Cell>
                                 <Table.Cell>
                                     <Link
-                                        to={`/${referentiel.id}`}
+                                        to={`${referentiel.id}`}
                                         key={referentiel.id}
                                     >
                                         <Icon link name='eye' />
@@ -67,7 +67,7 @@ export default function ReadList() {
                                 </Table.Cell>
                                 <Table.Cell>
                                     <Link
-                                        to={`/${referentiel.id}`}
+                                        to={`${referentiel.id}/edit`}
                                         key={referentiel.id}
                                     >
                                         <Icon link name='edit' />

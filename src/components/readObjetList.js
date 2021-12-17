@@ -105,7 +105,7 @@ export default function ReadList() {
                             </Table.Body>
                         </Table> 
                         : <Header>Aucun objet</Header> }
-                        <Button type='creerObjet'>Nouvel Objet</Button> 
+                        <Link to="create"><Button type='creerObjet'>Nouvel Objet</Button> </Link>
                     </Container>
                 </Grid.Column>
                 <Grid.Column>
@@ -137,7 +137,7 @@ export default function ReadList() {
                                                 </Table.Cell>
                                                 <Table.Cell>
                                                     <Link
-                                                        to={`/${parametre.id}`}
+                                                        to={`${parametre.id}/edit`}
                                                         key={parametre.id}
                                                     >
                                                         <Icon link name='edit' />

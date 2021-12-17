@@ -10,6 +10,7 @@ import ReadRefList from './components/readRefList';
 import ReadObjectList from './components/readObjetList';
 import UpdateConfig from './components/updateConfig';
 import { BrowserRouter, BrowserRouter as Router, Routes, Route, Outlet } from 'react-router-dom';
+import UpdateObjet from './components/updateObjet';
 
 function App() {
   return (
@@ -22,14 +23,20 @@ function App() {
           <Route path="create" element={<Create />} />
           <Route path=":id" element={<Outlet />} >
             <Route index element={<ReadList />} />
+            <Route path="edit" element={<UpdateConfig />} />
             <Route path="configurations" element={<Outlet />} >
               <Route index element={<ReadList />} />
               <Route path="create" element={<CreateConfig />} />
               <Route path=":id" element={<Outlet />} >
                 <Route index element={<ReadRootList />} />
-                <Route path=":objectId" element={<ReadObjectList />} >
+                <Route path=":objectId" element={<Outlet />} >
+                  <Route index element={<ReadObjectList />} />                  <Route path="create" element={<CreateObject />} />
+                  <Route path="edit" element={<UpdateObjet />} />
                   <Route path="create" element={<CreateObject />} />
-                  <Route path="edit" element={<CreateObject />} />
+                  <Route path=":objectsId" element={<ReadObjectList />} >
+                    <Route path="create" element={<CreateObject />} />
+                    <Route path="edit" element={<CreateObject />} />
+                  </Route>
                 </Route>
                 <Route path="edit" element={<UpdateConfig />} />
               </Route>

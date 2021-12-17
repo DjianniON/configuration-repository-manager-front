@@ -20,17 +20,6 @@ export default function ReadList() {
             })
     }, [])
 
-    const getData = () => {
-        axios.get(`http://localhost:8080/api/v1/configurations`, {
-            headers: {
-                "Content-type": "application/json"
-            }
-        })
-            .then((getData) => {
-                setAPIData(getData.data);
-            })
-    }
-
     const deleteConfiguration = (id) => {
         console.log("delete " + id);
         /*axios.delete(`localhost:8080/api/v1/configurations/${id}`)
@@ -93,7 +82,7 @@ export default function ReadList() {
                     }
                 </Table.Body>
             </Table>
-            <Link to="/create"><Button color='green'>Nouvelle configuration</Button></Link>
+            <Link to="configurations/create"><Button color='green'>Nouvelle configuration</Button></Link>
         </Container>
     )
 }
