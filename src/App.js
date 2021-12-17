@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 
+import Create from './components/create';
 import CreateConfig from './components/createConfig';
 import CreateObject from './components/createObjet';
 import ReadList from './components/readList';
@@ -17,7 +18,7 @@ function App() {
         <h2 className="main-header">Projet DA50 - Front</h2>
         <Routes>
           <Route path="/" element={<ReadRefList />} />
-          <Route path="create" element={<CreateConfig />} />
+          <Route path="create" element={<Create />} />
           <Route path=":id" element={<Outlet />} >
             <Route index element={<ReadList />} />
             <Route path="configurations" element={<Outlet />} >

@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import { Button, Checkbox, Container, Form } from 'semantic-ui-react'
+import { Button, Container, Form } from 'semantic-ui-react'
+import {Link} from 'react-router-dom'
 
-export default function Create() {
+export default function UpdateObjet() {
     const [objet, setObjet] = useState('');
     const [description, setDescription] = useState('');
     useEffect(() => {
@@ -11,7 +12,7 @@ export default function Create() {
     return (
         <div>
             <Container>
-                <Form className="create-form">
+                <Form className="update-objet-form">
                     <Form.Field>
                         <label>Nom de l'objet</label>
                         <input placeholder='Objet' onChange={(e) => setObjet(e.target.value)} />
