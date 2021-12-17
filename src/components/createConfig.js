@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { Button, Checkbox, Container, Form } from 'semantic-ui-react'
+import { Link } from 'react-router-dom';
 
-export default function Create() {
+export default function CreateConfig() {
     const [configuration, setConfiguration] = useState('');
     const [description, setDescription] = useState('');
     const postData = () => {
@@ -20,8 +21,8 @@ export default function Create() {
                         <label>Description</label>
                         <input placeholder='Description' onChange={(e) => setDescription(e.target.value)} />
                     </Form.Field>
-                    <Button type='creer' color='green'>Créer</Button>
-                    <Button type='annuler' color='red'>Annuler</Button>
+                    <Link to="/readList"><Button type='creer' color='green'>Créer</Button></Link>
+                    <Link to="/readList"><Button type='annuler' color='red'>Annuler</Button></Link>
                 </Form>
             </Container>
         </div>
