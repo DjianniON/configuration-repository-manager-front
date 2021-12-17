@@ -4,6 +4,7 @@ import './App.css';
 import CreateConfig from './components/createConfig';
 import CreateObject from './components/createObjet';
 import ReadList from './components/readList';
+import ReadRootList from './components/readRootList';
 import ReadRefList from './components/readRefList';
 import ReadObjectList from './components/readObjetList';
 import UpdateConfig from './components/updateConfig';
@@ -24,13 +25,13 @@ function App() {
               <Route index element={<ReadList />} />
               <Route path="create" element={<CreateConfig />} />
               <Route path=":id" element={<Outlet />} >
-                <Route index element={<ReadObjectList />} />
+                <Route index element={<ReadRootList />} />
+                <Route path=":objectId" element={<ReadObjectList />} >
+                  <Route path="create" element={<CreateObject />} />
+                  <Route path="edit" element={<CreateObject />} />
+                </Route>
                 <Route path="edit" element={<UpdateConfig />} />
               </Route>
-            </Route>
-            <Route path="objects" element={<ReadObjectList />} >
-              <Route path="create" element={<CreateObject />} />
-              <Route path=":objectId" element={<CreateObject />} />
             </Route>
           </Route>
           <Route

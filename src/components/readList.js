@@ -8,9 +8,9 @@ export default function ReadList() {
     let params = useParams();
     let referentiel = parseInt(params.id, 10);
     const [APIData, setAPIData] = useState([]);
-    //TODO: remettre /${referentiel}
+
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/v1/configurations`, {
+        axios.get(`http://localhost:8080/api/v1/referentiel/${referentiel}/configurations`, {
             headers: {
                 "Content-type": "application/json"
             }

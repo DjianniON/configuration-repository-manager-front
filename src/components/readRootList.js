@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { Table, Icon, Container, Button } from 'semantic-ui-react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 
-export default function ReadList() {
+export default function ReadRootList() {
+    let params = useParams();
+    let configuration = parseInt(params.id, 10);
     const [APIData, setAPIData] = useState([]);
+
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/v1/referentiels`, {
+        axios.get(`http://localhost:8080/api/v1/configuration/${configuration}/objets`, {
             headers: {
                 "Content-type": "application/json"
             }
@@ -17,26 +20,15 @@ export default function ReadList() {
             })
     }, [])
 
-    const getData = () => {
-        axios.get(`http://localhost:8080/api/v1/referentiels`, {
-            headers: {
-                "Content-type": "application/json"
-            }
-        })
-            .then((getData) => {
-                setAPIData(getData.data);
-            })
-    }
-
-    const deleteConfiguration = (id) => {
+    const deleteObject = (id) => {
         console.log("delete " + id);
-        /*axios.delete(`localhost:8080/api/v1/referentiels/${id}`)
+        /*axios.delete(`localhost:8080/api/v1/configurations/${id}`)
         .then(() => {
             getData();
         })*/
     }
 
-    const exportConfiguration = (id) => {
+    const exportObject = (id) => {
         console.log("Export " + id);
     }
 
@@ -45,7 +37,7 @@ export default function ReadList() {
             <Table singleLine>
                 <Table.Header>
                     <Table.Row>
-                        <Table.HeaderCell>Nom du référentiel</Table.HeaderCell>
+                        <Table.HeaderCell>Nom de la configuration</Table.HeaderCell>
                         <Table.HeaderCell>Voir</Table.HeaderCell>
                         <Table.HeaderCell>Editer</Table.HeaderCell>
                         <Table.HeaderCell>Exporter</Table.HeaderCell>
@@ -53,33 +45,33 @@ export default function ReadList() {
                     </Table.Row>
                 </Table.Header>
                 <Table.Body>
-                    {APIData.map((referentiel) => {
+                    {APIData.map((objet) => {
                         return (
                             <Table.Row>
-                                <Table.Cell>{referentiel.nom}</Table.Cell>
+                                <Table.Cell>{objet.nom}</Table.Cell>
                                 <Table.Cell>
                                     <Link
-                                        to={`/${referentiel.id}`}
-                                        key={referentiel.id}
+                                        to={`${objet.id}`}
+                                        key={objet.id}
                                     >
                                         <Icon link name='eye' />
                                     </Link>
                                 </Table.Cell>
                                 <Table.Cell>
                                     <Link
-                                        to={`/${referentiel.id}`}
-                                        key={referentiel.id}
+                                        to={`${objet.id}/edit`}
+                                        key={objet.id}
                                     >
                                         <Icon link name='edit' />
                                     </Link>
                                 </Table.Cell>
                                 <Table.Cell>
-                                    <span onClick={() => exportConfiguration(referentiel.id)}>
+                                    <span onClick={() => exportObject(objet.id)}>
                                         <Icon link name='download' />
                                     </span>
                                 </Table.Cell>
                                 <Table.Cell>
-                                    <span onClick={() => deleteConfiguration(referentiel.id)}>
+                                    <span onClick={() => deleteObject(objet.id)}>
                                         <Icon link name='close' />
                                     </span>
                                 </Table.Cell>
@@ -90,7 +82,7 @@ export default function ReadList() {
                     }
                 </Table.Body>
             </Table>
-            <Link to="/create"><Button color='green'>Nouveau référentiel</Button></Link>
+            <Link to="/create"><Button color='green'>Nouvel objet</Button></Link>
         </Container>
     )
 }
