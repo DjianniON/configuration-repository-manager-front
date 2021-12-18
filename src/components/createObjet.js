@@ -5,7 +5,6 @@ import { useParams } from 'react-router-dom';
 
 export default function Create() {
     let params = useParams();
-    console.log(params);
     let objet = parseInt(params.objectId, 10);
     const [nom, setObjectName] = useState('');
     const [description, setObjectDescription] = useState('');
