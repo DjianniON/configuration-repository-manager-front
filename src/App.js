@@ -9,7 +9,8 @@ import ReadRootList from './components/readRootList';
 import ReadRefList from './components/readRefList';
 import ReadObjectList from './components/readObjetList';
 import UpdateConfig from './components/updateConfig';
-import { BrowserRouter, BrowserRouter as Router, Routes, Route, Outlet } from 'react-router-dom';
+import UpdateRef from './components/updateRef';
+import { BrowserRouter as Router, Routes, Route, Outlet } from 'react-router-dom';
 import UpdateObjet from './components/updateObjet';
 
 function App() {
@@ -23,7 +24,7 @@ function App() {
           <Route path="create" element={<CreateRef />} />
           <Route path=":id" element={<Outlet />} >
             <Route index element={<ReadList />} />
-            <Route path="edit" element={<UpdateConfig />} />
+            <Route path="edit" element={<UpdateRef />} />
             <Route path="configurations" element={<Outlet />} >
               <Route index element={<ReadList />} />
               <Route path="create" element={<CreateConfig />} />

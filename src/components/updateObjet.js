@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Container, Form } from 'semantic-ui-react';
+import { Button, Container, Form, TextArea } from 'semantic-ui-react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
@@ -11,8 +11,15 @@ export default function UpdateObjet() {
     const [nom, setObjectName] = useState('');
     const [description, setObjectDescription] = useState('');
     useEffect(() => {
-        setObjectName(localStorage.getItem('configuration'));
-        setObjectDescription(localStorage.getItem('description'));
+        axios.get(`http://localhost:8080/api/v1/objet/${objet}`, {
+            headers: {
+                "Content-type": "application/json"
+            }
+        }).then((response) => {
+            console.log(response.data);
+            setObjectName(response.data.nom);
+            setObjectDescription(response.data.description);
+        })      
     }, []);
 
     const updateObject = () => {
@@ -30,14 +37,14 @@ export default function UpdateObjet() {
                 <Form className="update-objet-form">
                     <Form.Field>
                         <label>Nom de l'objet</label>
-                        <input placeholder='Objet' onChange={(e) => setObjectName(e.target.value)} />
+                        <input placeholder='Objet' value={nom} onChange={(e) => setObjectName(e.target.value)} />
                     </Form.Field>
                     <Form.Field>
                         <label>Description</label>
-                        <input placeholder='Description' onChange={(e) => setObjectDescription(e.target.value)} />
+                        <TextArea placeholder='Description' value={description} onChange={(e) => setObjectDescription(e.target.value)} />
                     </Form.Field>
                     <Button type='submit' color='green' onClick={updateObject}>Mettre à jour</Button>
-                    <Link to="../"><Button type='annuler' color='red'>Annuler</Button></Link>
+                    <Link to="../"><Button color='red'>Annuler</Button></Link>
                 </Form>
             </Container>
         </div>
