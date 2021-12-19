@@ -77,9 +77,12 @@ export default function ReadList() {
                                     </Link>
                                 </Table.Cell>
                                 <Table.Cell>
-                                    <span onClick={() => exportConfiguration(configuration.id)}>
-                                        <Icon link name='download' />
-                                    </span>
+                                <Link
+                                        to={`configurations/${configuration.id}/edit`}
+                                        key={configuration.id}
+                                    >
+                                        <Icon link name='export' />
+                                    </Link>
                                 </Table.Cell>
                                 <Table.Cell>
                                     <span onClick={() => deleteConfiguration(configuration.id)}>

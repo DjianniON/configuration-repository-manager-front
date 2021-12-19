@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 
-export default function ReadList() {
+export default function ReadRefList() {
     const [APIData, setAPIData] = useState([]);
     useEffect(() => {
         axios.get(`http://localhost:8080/api/v1/configurations`, {
@@ -79,9 +79,12 @@ export default function ReadList() {
                                     </Link>
                                 </Table.Cell>
                                 <Table.Cell>
-                                    <span onClick={() => exportConfiguration(referentiel.id)}>
+                                   <Link 
+                                        to={`/export/${referentiel.id}`}
+                                        key={referentiel.id}
+                                    >    
                                         <Icon link name='download' />
-                                    </span>
+                                    </Link>
                                 </Table.Cell>
                                 <Table.Cell>
                                     <span onClick={() => deleteConfiguration(referentiel.id)}>

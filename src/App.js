@@ -8,6 +8,7 @@ import ReadList from './components/readList';
 import ReadRefList from './components/readRefList';
 import ReadObjectList from './components/readObjetList';
 import UpdateConfig from './components/updateConfig';
+import Export from './components/export';
 import { BrowserRouter, BrowserRouter as Router, Routes, Route, Outlet } from 'react-router-dom';
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
               <Route path="create" element={<CreateObject />} />
               <Route path=":objectId" element={<CreateObject />} />
             </Route>
+            <Route path="export" element={<Export />} />
           </Route>
           <Route
             path="*"
