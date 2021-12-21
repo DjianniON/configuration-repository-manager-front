@@ -42,7 +42,8 @@ export default function ReadRootList() {
 
     return (
         <Container>
-            <Header>{ConfigName}</Header>
+            <Header as="h1">Liste des objets de {ConfigName}</Header>
+            <Header></Header>
             <Table singleLine>
                 <Table.Header>
                     <Table.Row>

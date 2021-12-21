@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Table, Icon, Container, Button } from 'semantic-ui-react';
+import { Table, Icon, Container, Button, Header } from 'semantic-ui-react';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
 
@@ -34,6 +34,7 @@ export default function ReadList() {
 
     return (
         <Container>
+        <Header as="h1">Liste des configurations</Header>
             <Table singleLine>
                 <Table.Header>
                     <Table.Row>
@@ -51,7 +52,7 @@ export default function ReadList() {
                                 <Table.Cell>{configuration.nom}</Table.Cell>
                                 <Table.Cell>
                                     <Link
-                                        to={`/configurations/${configuration.id}`}
+                                        to={`configurations/${configuration.id}`}
                                         key={configuration.id}
                                     >
                                         <Icon link name='eye' />
