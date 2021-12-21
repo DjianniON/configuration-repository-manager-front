@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Projet DA50",
+  "name": "Outil de gestion de référentiels de configurations",
   "icons": [
     {
       "src": "favicon.ico",

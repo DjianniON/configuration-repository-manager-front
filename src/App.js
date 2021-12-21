@@ -1,46 +1,40 @@
-import logo from './logo.svg';
 import './App.css';
 
 import CreateRef from './components/createRef';
 import CreateConfig from './components/createConfig';
-import CreateObject from './components/createObjet';
+import CreateObjet from './components/createObjet';
 import ReadList from './components/readList';
 import ReadRootList from './components/readRootList';
 import ReadRefList from './components/readRefList';
-import ReadObjectList from './components/readObjetList';
+import ReadObjetList from './components/readObjetList';
 import UpdateConfig from './components/updateConfig';
-import { BrowserRouter, BrowserRouter as Router, Routes, Route, Outlet } from 'react-router-dom';
+import UpdateRef from './components/updateRef';
+import { BrowserRouter as Router, Routes, Route, Outlet } from 'react-router-dom';
 import UpdateObjet from './components/updateObjet';
+import { Container,Divider } from 'semantic-ui-react';
 
 function App() {
   return (
+    <Container>
+    <Divider hidden />
     <Router>
-
       <div className="App">
-        <h2 className="main-header">Projet DA50 - Front</h2>
         <Routes>
           <Route path="/" element={<ReadRefList />} />
           <Route path="create" element={<CreateRef />} />
           <Route path=":id" element={<Outlet />} >
-            <Route index element={<ReadList />} />
+            <Route path="configurations/create" element={<CreateConfig />} />
+            <Route path="configurations/:configId" element={<Outlet />} >
+            <Route index element={<ReadRootList />} />
             <Route path="edit" element={<UpdateConfig />} />
-            <Route path="configurations" element={<Outlet />} >
-              <Route index element={<ReadList />} />
-              <Route path="create" element={<CreateConfig />} />
-              <Route path=":id" element={<Outlet />} >
-                <Route index element={<ReadRootList />} />
-                <Route path=":objectId" element={<Outlet />} >
-                  <Route index element={<ReadObjectList />} />                  <Route path="create" element={<CreateObject />} />
-                  <Route path="edit" element={<UpdateObjet />} />
-                  <Route path="create" element={<CreateObject />} />
-                  <Route path=":objectsId" element={<ReadObjectList />} >
-                    <Route path="create" element={<CreateObject />} />
-                    <Route path="edit" element={<CreateObject />} />
-                  </Route>
-                </Route>
-                <Route path="edit" element={<UpdateConfig />} />
-              </Route>
-            </Route>
+            <Route path=":objectId" element={<ReadObjetList />}/>
+          </Route>
+            <Route index element={<ReadList />} />
+            <Route path="edit" element={<UpdateRef />} />
+          </Route>
+          <Route path="objects/:objectId" element={<Outlet />} >
+              <Route path="edit" element={<UpdateObjet />} />
+              <Route path="create" element={<CreateObjet />} />
           </Route>
           <Route
             path="*"
@@ -54,6 +48,7 @@ function App() {
         </Routes>
       </div>
     </Router>
+    </Container>
   );
 }
 

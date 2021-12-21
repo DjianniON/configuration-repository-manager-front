@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Table, Icon, Container, Button } from 'semantic-ui-react';
+import { Table, Icon, Container, Button, Header } from 'semantic-ui-react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
@@ -42,6 +42,7 @@ export default function ReadList() {
 
     return (
         <Container>
+            <Header as="h1">Liste des référentiels</Header>
             <Table singleLine>
                 <Table.Header>
                     <Table.Row>

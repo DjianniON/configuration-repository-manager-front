@@ -6,7 +6,7 @@ import { Link, useParams } from 'react-router-dom';
 
 export default function ReadRootList() {
     let params = useParams();
-    let configuration = parseInt(params.id, 10);
+    let configuration = parseInt(params.configId, 10);
     const [APIData, setAPIData] = useState([]);
     const [ConfigName, setConfigName] = useState('');
 
@@ -42,7 +42,8 @@ export default function ReadRootList() {
 
     return (
         <Container>
-            <Header>{ConfigName}</Header>
+            <Header as="h1">Liste des objets de {ConfigName}</Header>
+            <Header></Header>
             <Table singleLine>
                 <Table.Header>
                     <Table.Row>
@@ -68,7 +69,7 @@ export default function ReadRootList() {
                                 </Table.Cell>
                                 <Table.Cell>
                                     <Link
-                                        to={`${objet.id}/edit`}
+                                        to={`/objects/${objet.id}/edit`}
                                         key={objet.id}
                                     >
                                         <Icon link name='edit' />
@@ -91,7 +92,7 @@ export default function ReadRootList() {
                     }
                 </Table.Body>
             </Table>
-            <Link to="/create"><Button color='green'>Nouvel objet</Button></Link>
+            <Link to={`/objects/${configuration}/create`}><Button color='green'>Nouvel objet</Button></Link>
         </Container>
     )
 }
