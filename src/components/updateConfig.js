@@ -6,7 +6,7 @@ import axios from 'axios';
 export default function UpdateConfig() {
     let params = useParams();
     let navigation = useNavigate();
-    let configuration = parseInt(params.id, 10);
+    let configuration = parseInt(params.configId, 10);
     const [nom, setConfigName] = useState('');
     const [description, setConfigDescription] = useState('');
     useEffect(() => {
@@ -22,7 +22,7 @@ export default function UpdateConfig() {
     }, []);
 
     const updateConfig = () => {
-        axios.put(`http://localhost:8080/api/v1/configuration/${configuration}`, {
+        axios.patch(`http://localhost:8080/api/v1/configuration/${configuration}`, {
             nom,
             description
         }).then(() => {

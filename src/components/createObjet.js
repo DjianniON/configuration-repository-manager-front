@@ -3,7 +3,7 @@ import { Button, Checkbox, Container, Form } from 'semantic-ui-react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
-export default function Create() {
+export default function CreateObjet() {
     let params = useParams();
     let objet = parseInt(params.objectId, 10);
     const [nom, setObjectName] = useState('');

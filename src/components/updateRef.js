@@ -22,7 +22,7 @@ export default function UpdateRef() {
     }, []);
 
     const updateRef = () => {
-        axios.put(`http://localhost:8080/api/v1/referentiel/${referentiel}`, {
+        axios.patch(`http://localhost:8080/api/v1/referentiel/${referentiel}`, {
             nom,
             description
         }).then(() => {

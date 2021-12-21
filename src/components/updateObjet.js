@@ -23,7 +23,7 @@ export default function UpdateObjet() {
     }, []);
 
     const updateObject = () => {
-        axios.put(`http://localhost:8080/api/v1/objet/${objet}`, {
+        axios.patch(`http://localhost:8080/api/v1/objet/${objet}`, {
             nom,
             description
         }).then(() => {
