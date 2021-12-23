@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Form, Container, TextArea } from 'semantic-ui-react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { Container, Header } from 'semantic-ui-react';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import BasicForm from './form/basicForm';
 
 export default function UpdateRef() {
     let params = useParams();
@@ -31,21 +32,9 @@ export default function UpdateRef() {
     }
 
     return (
-        <div>
-            <Form className="create-form">
-                <Container>
-                    <Form.Field>
-                        <label>Nom du référentiel</label>
-                        <input placeholder='Nom de la configuration' value={nom} onChange={(e) => setRefName(e.target.value)} />
-                    </Form.Field>
-                    <Form.Field>
-                        <label>Description</label>
-                        <TextArea placeholder='Description' value={description} onChange={(e) => setRefDescription(e.target.value)} />
-                    </Form.Field>
-                    <Button type='submit' color='green' onClick={updateRef}>Mettre à jour</Button>
-                    <Link to="../"><Button color='red'>Annuler</Button></Link>
-                </Container>
-            </Form>
-        </div>
+        <Container>
+            <Header as="h1">Modifier le référentiel</Header>
+            <BasicForm nom={nom} description={description} setNom={setRefName} setDescription={setRefDescription} operation={updateRef} type="update" />
+        </Container>
     )
 }

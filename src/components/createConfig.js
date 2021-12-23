@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { Button, Checkbox, Container, Form } from 'semantic-ui-react'
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { Container, Header } from 'semantic-ui-react'
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import BasicForm from './form/basicForm';
 
 export default function CreateConfig() {
     let params = useParams();
@@ -24,21 +25,9 @@ export default function CreateConfig() {
     }
     
     return (
-        <div>
             <Container>
-                <Form className="create-form">
-                    <Form.Field>
-                        <label>Nom de la configuration</label>
-                        <input placeholder='Configuration' onChange={(e) => setConfigName(e.target.value)} />
-                    </Form.Field>
-                    <Form.Field>
-                        <label>Description</label>
-                        <input placeholder='Description' onChange={(e) => setConfigDescription(e.target.value)} />
-                    </Form.Field>
-                    <Button type='creer' color='green' onClick={createConfig}>Créer</Button>
-                    <Link to="../"><Button type='annuler' color='red'>Annuler</Button></Link>
-                </Form>
+                <Header as="h1">Créer une configuration</Header>
+                <BasicForm nom={nom} description={description} setNom={setConfigName} setDescription={setConfigName} operation={createConfig} />
             </Container>
-        </div>
     )
 }
