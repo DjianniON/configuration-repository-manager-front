@@ -9,16 +9,15 @@ import ReadRefList from './components/readRefList';
 import ReadObjetList from './components/readObjetList';
 import UpdateConfig from './components/updateConfig';
 import UpdateRef from './components/updateRef';
-import { BrowserRouter as Router, Routes, Route, Outlet } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Outlet, Link } from 'react-router-dom';
 import UpdateObjet from './components/updateObjet';
-import { Container, Divider } from 'semantic-ui-react';
+import { Container, Icon, Menu } from 'semantic-ui-react';
 
 function App() {
   return (
-    <Container>
-      <Router>
-        <div className="App">
-          <Divider hidden />
+    <div className="App">
+      <Router>  
+        <Container fluid>
           <Routes>
             <Route path="/" element={<ReadRefList />} />
             <Route path="create" element={<CreateRef />} />
@@ -51,9 +50,10 @@ function App() {
               }
             />
           </Routes>
-        </div>
+        </Container>
       </Router>
-    </Container>
+
+    </div>
   );
 }
 

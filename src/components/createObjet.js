@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Header, Container } from 'semantic-ui-react';
+import { Header, Grid, Segment } from 'semantic-ui-react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import BasicForm from './form/basicForm';
@@ -42,15 +42,19 @@ export default function CreateObjet(props) {
     }
 
     return (
-        <Container>
-            <Header as="h1">Créer un objet</Header>
-            <BasicForm
-                nom={nom}
-                description={description}
-                setNom={setObjetName}
-                setDescription={setObjetDescription}
-                operation={props.type === 'objet' ? createObjet : props.type === 'configuration' ? createRootObjetForConfiguration : props.type === 'referentiel' ? createRootObjetForReferentiel : null}
-            />
-        </Container>
+        <Grid style={{ height: '100vh' }} verticalAlign='middle' textAlign='center'>
+            <Grid.Column style={{ maxWidth: '50%' }}>
+                <Segment padded="very">
+                    <Header as="h1">Créer un objet</Header>
+                    <BasicForm
+                        nom={nom}
+                        description={description}
+                        setNom={setObjetName}
+                        setDescription={setObjetDescription}
+                        operation={props.type === 'objet' ? createObjet : props.type === 'configuration' ? createRootObjetForConfiguration : props.type === 'referentiel' ? createRootObjetForReferentiel : null}
+                    />
+                </Segment>
+            </Grid.Column>
+        </Grid>
     )
 }

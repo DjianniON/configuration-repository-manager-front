@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
 import ReadList from './list/readList';
 import DeleteModal from './deleteModal';
+import ContextMenu from './contextMenu';
 
 
 export default function ReadConfigList() {
@@ -51,6 +52,7 @@ export default function ReadConfigList() {
 
     return (
         <Container>
+            <ContextMenu />
             <Header as="h1">Liste des configurations</Header>
             <ReadList configurations={APIData} type="Configuration" links="configurations/" deleteElement={openDeleteModal} export={exportConfiguration} active={active} />
             <Link to="configurations/create"><Button color='green'>Nouvelle configuration</Button></Link>

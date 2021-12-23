@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
 import ObjetsList from './list/objetsList';
 import DeleteModal from './deleteModal';
+import ContextMenu from './contextMenu';
 
 export default function ReadRootList() {
     let params = useParams();
@@ -60,6 +61,7 @@ export default function ReadRootList() {
 
     return (
         <Container>
+            <ContextMenu />
             <Header as="h1" textAlign='center'>{ConfigName}</Header>
             <Header as="h4" textAlign='center'>{ConfigDescription}</Header>
             <DimmerDimmable as={Segment} textAlign="left" padded='very' loading={active} dimmed={active} blurring>               

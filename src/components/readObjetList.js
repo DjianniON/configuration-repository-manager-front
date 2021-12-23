@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Grid, Table, Button, Icon, Header, DimmerDimmable, Segment } from 'semantic-ui-react'
 import axios from 'axios';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import ObjetsTable from './list/objetsTable';
 import DeleteModal from './deleteModal';
+import ContextMenu from './contextMenu';
 
 export default function ReadObjetList() {
     let params = useParams();
-    let navigation = useNavigate();
     let objet = parseInt(params.objectId, 10);
     const [ObjectName, setObjectName] = useState('');
     const [ObjectData, setObjectData] = useState([]);
@@ -67,8 +67,8 @@ export default function ReadObjetList() {
 
     return (
         <Container>
+            <ContextMenu />
             <Header as="h1">Liste des objets de {ObjectName}</Header>
-            <Icon name='arrow left' onClick={() => navigation(-1)} />
             <DimmerDimmable as={Segment} basic loading={active} dimmed={active} blurring>
                 <Grid columns="2" relaxed='very' celled>
                     <Grid.Column>
