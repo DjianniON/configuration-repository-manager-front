@@ -61,7 +61,7 @@ export default function ReadRootList() {
 
     return (
         <Container>
-            <ContextMenu />
+            <ContextMenu nom={ConfigName} />
             <Header as="h1" textAlign='center'>{ConfigName}</Header>
             <Header as="h4" textAlign='center'>{ConfigDescription}</Header>
             <DimmerDimmable as={Segment} textAlign="left" padded='very' loading={active} dimmed={active} blurring>               

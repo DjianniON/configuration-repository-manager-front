@@ -67,7 +67,7 @@ export default function ReadObjetList() {
 
     return (
         <Container>
-            <ContextMenu />
+            <ContextMenu nom={ObjectName} />
             <Header as="h1">Liste des objets de {ObjectName}</Header>
             <DimmerDimmable as={Segment} basic loading={active} dimmed={active} blurring>
                 <Grid columns="2" relaxed='very' celled>

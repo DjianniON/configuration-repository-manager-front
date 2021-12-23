@@ -12,6 +12,7 @@ export default function ReadConfigList() {
     let referentiel = parseInt(params.id, 10);
     const [APIData, setAPIData] = useState([]);
     const [active, setActive] = useState(true);
+    const [refNom, setRefNom] = useState('');
     const [currentConfig, setCurrentConfig] = useState([]);
     const [openModal, setOpenModal] = useState(false);
 
@@ -21,16 +22,24 @@ export default function ReadConfigList() {
 
     const getData = () => {
         setActive(true);
-        axios.get(`http://localhost:8080/api/v1/referentiel/${referentiel}/configurations`, {
+        axios.get(`http://localhost:8080/api/v1/referentiel/${referentiel}`, {
             headers: {
                 "Content-type": "application/json"
             }
         })
             .then((response) => {
-                setAPIData(response.data);
-                setActive(false);
+                setRefNom(response.data.nom);
+                axios.get(`http://localhost:8080/api/v1/referentiel/${referentiel}/configurations`, {
+                    headers: {
+                        "Content-type": "application/json"
+                    }
+                }).then((response) => {
+                    setAPIData(response.data);
+                    setActive(false);
+                })
             })
     }
+
 
     const deleteConfiguration = (id) => {
         console.log("delete " + id);
@@ -52,7 +61,7 @@ export default function ReadConfigList() {
 
     return (
         <Container>
-            <ContextMenu />
+            <ContextMenu nom={refNom} />
             <Header as="h1">Liste des configurations</Header>
             <ReadList configurations={APIData} type="Configuration" links="configurations/" deleteElement={openDeleteModal} export={exportConfiguration} active={active} />
             <Link to="configurations/create"><Button color='green'>Nouvelle configuration</Button></Link>
