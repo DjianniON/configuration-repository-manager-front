@@ -22,7 +22,7 @@ export default function BasicForm(props) {
                 <TextArea placeholder='Description' value={props.description} onChange={(e) => props.setDescription(e.target.value)} />
             </Form.Field>
             <Button type='submit' color='green'>{props.type === "update" ? "Mettre à jour" : "Créer" }</Button>
-            <Button onClick={() => navigation(-1)} color='red'>Annuler</Button>
+            <Button type='button' onClick={() => navigation(-1)} color='red'>Annuler</Button>
     </Form>
     )
 }
