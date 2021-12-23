@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Checkbox, Container, Form } from 'semantic-ui-react';
+import { Header, Container } from 'semantic-ui-react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+import BasicForm from './form/basicForm';
 
 export default function CreateObjet() {
     let params = useParams();
+    let navigation = useNavigate();
     let objet = parseInt(params.objectId, 10);
     const [nom, setObjectName] = useState('');
     const [description, setObjectDescription] = useState('');
@@ -12,30 +14,18 @@ export default function CreateObjet() {
         setObjectName(localStorage.getItem('objectName'));
         setObjectDescription(localStorage.getItem('objectDescription'));
     }, []);
-    const createObject = () => {       
+    const createObject = () => {
         axios.post(`http://localhost:8080/api/v1/objet/${objet}/objet`, {
             nom,
             description
         }).then(() => {
-            console.log("ok");
+            navigation(-1)
         })
     }
     return (
-        <div>
-            <Container>
-                <Form className="create-form">
-                    <Form.Field>
-                        <label>Nom de l'objet</label>
-                        <input placeholder='Objet' onChange={(e) => setObjectName(e.target.value)} />
-                    </Form.Field>
-                    <Form.Field>
-                        <label>Description</label>
-                        <input placeholder='Description' onChange={(e) => setObjectDescription(e.target.value)} />
-                    </Form.Field>
-                    <Button type='creer' color='green' onClick={createObject}>Créer</Button>
-                    <Button type='annuler' color='red'>Annuler</Button>
-                </Form>
-            </Container>
-        </div>
+        <Container>
+            <Header as="h1">Créer un objet</Header>
+            <BasicForm nom={nom} description={description} setNom={setObjectName} setDescription={setObjectDescription} operation={createObject} />
+        </Container>
     )
 }

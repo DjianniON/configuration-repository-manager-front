@@ -1,12 +1,12 @@
 import React from 'react';
-import { List, Icon, Label, Divider } from 'semantic-ui-react';
+import { List, Icon, Divider } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
 
 export default function ObjetsList(props) {
     let objet = props.objet;
     return (
-        <List.Item key={objet.id}>
+        <List.Item>
             <Icon name='caret right' />
             <List.Content>
                 <List.Header>
@@ -29,7 +29,10 @@ export default function ObjetsList(props) {
                 </List.Header>
                 <List.Description>{objet.description}</List.Description>
                 <Divider />
-                {objet.objetsEnfants ? objet.objetsEnfants.map(enfant => <List.List><ObjetsList objet={enfant} /></List.List>) : null}
+                {objet.objetsEnfants ?
+                    <List.List>
+                        {objet.objetsEnfants.map(enfant => <ObjetsList key={enfant.id} objet={enfant} />)}
+                    </List.List> : null}
             </List.Content>
         </List.Item>
     )

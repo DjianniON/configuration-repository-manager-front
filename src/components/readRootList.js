@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Segment, List, Container, Button, Header } from 'semantic-ui-react';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
-import ReadList from './list/readList';
 import ObjetsList from './list/objetsList';
 
 
@@ -38,18 +37,14 @@ export default function ReadRootList() {
         })*/
     }
 
-    const exportObject = (id) => {
-        console.log("Export " + id);
-    }
-
     return (
         <Container>
             <Header as="h1">Liste des objets de {ConfigName}</Header>
-                <Segment textAlign="left">
+                <Segment textAlign="left" padded='very'>
                     <List size="large" verticalAlign='middle'>
                         {APIData.map((objet) => {
                             return (
-                                <ObjetsList objet={objet} delete={deleteObject} />
+                                <ObjetsList key={objet.id} objet={objet} delete={deleteObject} />
                             )
                         }
                         )

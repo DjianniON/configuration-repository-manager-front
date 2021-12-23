@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Container, Form, TextArea } from 'semantic-ui-react';
-import {Link} from 'react-router-dom';
+import { Header, Container } from 'semantic-ui-react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
+import BasicForm from './form/basicForm';
 
 export default function UpdateObjet() {
     let params = useParams();
@@ -19,7 +19,7 @@ export default function UpdateObjet() {
             console.log(response.data);
             setObjectName(response.data.nom);
             setObjectDescription(response.data.description);
-        })      
+        })
     }, []);
 
     const updateObject = () => {
@@ -32,21 +32,9 @@ export default function UpdateObjet() {
     }
 
     return (
-        <div>
-            <Container>
-                <Form className="update-objet-form">
-                    <Form.Field>
-                        <label>Nom de l'objet</label>
-                        <input placeholder='Objet' value={nom} onChange={(e) => setObjectName(e.target.value)} />
-                    </Form.Field>
-                    <Form.Field>
-                        <label>Description</label>
-                        <TextArea placeholder='Description' value={description} onChange={(e) => setObjectDescription(e.target.value)} />
-                    </Form.Field>
-                    <Button type='submit' color='green' onClick={updateObject}>Mettre à jour</Button>
-                    <Link to="../"><Button color='red'>Annuler</Button></Link>
-                </Form>
-            </Container>
-        </div>
+        <Container>
+            <Header as="h1">Modifier l'objet</Header>
+            <BasicForm nom={nom} description={description} setNom={setObjectName} setDescription={setObjectDescription} operation={updateObject} type="update" />
+        </Container>
     )
 }

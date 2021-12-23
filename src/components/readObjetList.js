@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Divider, Container, Grid, Segment, Table, Button, Icon, Breadcrumb, Header } from 'semantic-ui-react'
+import { Container, Grid, Table, Button, Icon, Header } from 'semantic-ui-react'
 import axios from 'axios';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import ObjetsTable from './list/objetsTable';
@@ -8,7 +8,6 @@ export default function ReadObjetList() {
     let params = useParams();
     let navigation = useNavigate();
     let objet = parseInt(params.objectId, 10);
-    const [sections, setSections] = useState([]);
     const [ObjectName, setObjectName] = useState('');
     const [ObjectData, setObjectData] = useState([]);
     const [APIData, setAPIData] = useState([]);
@@ -26,13 +25,11 @@ export default function ReadObjetList() {
                     }
                 })
                     .then((response) => {
-                        setSections([...sections, { key: `${objet}`, content: response.data.nom, link: false }]);
                         setObjectName(response.data.nom);
                         setObjectData(response.data.proprietes);
                     })
             })
     }, [objet])
-    //TODO: faire un truc moins moche
 
     const deleteObject = (id) => {
         console.log("delete " + id);
@@ -55,12 +52,9 @@ export default function ReadObjetList() {
             <Header as="h1">Liste des objets de {ObjectName}</Header>
             <Icon name='arrow left' onClick={() => navigation(-1)} />
             <Container>
-                <Breadcrumb icon='right angle' sections={sections} />
-                <Segment>
-                    
-                    <Grid columns="2" relaxed='very'>
+                    <Grid columns="2" relaxed='very' celled>
                         <Grid.Column>
-                            <Container>
+                            <Header>Enfants de {ObjectName}</Header>
                                 {APIData.length ?
                                     <Table singleLine>
                                         <Table.Header>
@@ -71,11 +65,10 @@ export default function ReadObjetList() {
                                                 <Table.HeaderCell>Supprimer</Table.HeaderCell>
                                             </Table.Row>
                                         </Table.Header>
-
                                         <Table.Body>
                                             {APIData.map((objet) => {
                                                 return (
-                                                    <ObjetsTable objet={objet} delete={deleteObject} />
+                                                    <ObjetsTable key={objet.id} objet={objet} link="../.." delete={deleteObject} />
                                                 )
                                             }
                                             )
@@ -83,12 +76,9 @@ export default function ReadObjetList() {
                                         </Table.Body>
                                     </Table>
                                     : <Header>Aucun objet</Header>}
-                                <Link to={`/objects/${objet}/create`}><Button type='creerObjet'>Nouvel Objet</Button> </Link>
-                            </Container>
-
+                                <Link to={`/objects/${objet}/create`}><Button type='creerObjet'>Nouvel Objet</Button></Link>
                         </Grid.Column>
                         <Grid.Column>
-                            <Container>
                                 <Header>Paramètres de {ObjectName}</Header>
                                 {ObjectData.length ?
                                 <Table singleLine>
@@ -100,35 +90,11 @@ export default function ReadObjetList() {
                                             <Table.HeaderCell>Supprimer</Table.HeaderCell>
                                         </Table.Row>
                                     </Table.Header>
-
                                     <Table.Body>
                                         {
                                             ObjectData.map((parametre) => {
                                                 return (
-                                                    <Table.Row key={parametre.id}>
-                                                        <Table.Cell>{parametre.nom}</Table.Cell>
-                                                        <Table.Cell>
-                                                            <Link
-                                                                to={`${parametre.id}`}
-                                                                key={parametre.id}
-                                                            >
-                                                                <Icon link name='eye' />
-                                                            </Link>
-                                                        </Table.Cell>
-                                                        <Table.Cell>
-                                                            <Link
-                                                                to={`/parameters/${parametre.id}/edit`}
-                                                                key={parametre.id}
-                                                            >
-                                                                <Icon link name='edit' />
-                                                            </Link>
-                                                        </Table.Cell>
-                                                        <Table.Cell>
-                                                            <span onClick={() => deleteParameter(parametre.id)}>
-                                                                <Icon link name='close' />
-                                                            </span>
-                                                        </Table.Cell>
-                                                    </Table.Row>
+                                                    <ObjetsTable key={parametre.id} objet={parametre} link="parametres" delete={deleteParameter} />
                                                 )
                                             }
                                             )
@@ -136,13 +102,9 @@ export default function ReadObjetList() {
                                     </Table.Body>
                                 </Table>
                                 : <Header>Aucun paramètre</Header>}
-                                <Button type='creerPara'>Nouveau Paramètre</Button>
-                            </Container>
+                                <Link to={`/objects/${objet}/create`}><Button type='creerPara'>Nouveau Paramètre</Button></Link>
                         </Grid.Column>
                     </Grid>
-
-                    <Divider vertical>-</Divider>
-                </Segment>
             </Container>
         </Container>
     )

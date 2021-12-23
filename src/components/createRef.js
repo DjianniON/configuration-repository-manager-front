@@ -1,7 +1,8 @@
-import React, {useState, useEffect} from 'react';
-import { Button, Checkbox, Container, Form } from 'semantic-ui-react'
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Container, Header } from 'semantic-ui-react'
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import BasicForm from './form/basicForm';
 
 export default function CreateRef() {
     let navigation = useNavigate();
@@ -21,19 +22,9 @@ export default function CreateRef() {
         })
     }
     return (
-    <Container>
-    <Form>
-        <Form.Field>
-            <label>Nom du référentiel</label>
-            <input placeholder='Référentiel' onChange={(e) => setRefName(e.target.value)}/>
-        </Form.Field>
-        <Form.Field>
-            <label>Description</label>
-            <input placeholder='Description' onChange={(e) => setRefDescription(e.target.value)} />
-        </Form.Field>
-        <Button type='submit' color='green' onClick={createRef}>Créer</Button>
-        <Link to='/'><Button type='annuler' color='red'>Annuler</Button></Link>
-    </Form>
-    </Container>
-)
+        <Container>
+            <Header as="h1">Créer un référentiel</Header>
+            <BasicForm nom={nom} description={description} setNom={setRefName} setDescription={setRefDescription} operation={createRef} />
+        </Container>
+    )
 }

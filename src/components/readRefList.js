@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Table, Icon, Container, Button, Header } from 'semantic-ui-react';
+import { Container, Button, Header } from 'semantic-ui-react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import ReadList from './list/readList';

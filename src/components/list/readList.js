@@ -10,10 +10,10 @@ export default function ReadList(props) {
             <Table.Header>
                 <Table.Row>
                     <Table.HeaderCell>{props.type}</Table.HeaderCell>
-                    <Table.HeaderCell>Voir</Table.HeaderCell>
-                    <Table.HeaderCell>Editer</Table.HeaderCell>
-                    <Table.HeaderCell>Exporter</Table.HeaderCell>
-                    <Table.HeaderCell>Supprimer</Table.HeaderCell>
+                    <Table.HeaderCell textAlign='center' width={1}>Voir</Table.HeaderCell>
+                    <Table.HeaderCell textAlign='center' width={1}>Editer</Table.HeaderCell>
+                    <Table.HeaderCell textAlign='center' width={1}>Exporter</Table.HeaderCell>
+                    <Table.HeaderCell textAlign='center' width={1}>Supprimer</Table.HeaderCell>
                 </Table.Row>
             </Table.Header>
             <Table.Body>
@@ -21,7 +21,7 @@ export default function ReadList(props) {
                     return (
                         <Table.Row>
                             <Table.Cell>{element.nom}</Table.Cell>
-                            <Table.Cell>
+                            <Table.Cell textAlign='center'>
                                 <Link
                                     to={`${props.links}${element.id}`}
                                     key={element.id}
@@ -29,7 +29,7 @@ export default function ReadList(props) {
                                     <Icon link name='eye' />
                                 </Link>
                             </Table.Cell>
-                            <Table.Cell>
+                            <Table.Cell textAlign='center'>
                                 <Link
                                     to={`${props.links}${element.id}/edit`}
                                     key={element.id}
@@ -37,12 +37,12 @@ export default function ReadList(props) {
                                     <Icon link name='edit' />
                                 </Link>
                             </Table.Cell>
-                            <Table.Cell>
+                            <Table.Cell textAlign='center'>
                                 <span onClick={() => props.export(element.id)}>
                                     <Icon link name='download' />
                                 </span>
                             </Table.Cell>
-                            <Table.Cell>
+                            <Table.Cell textAlign='center'>
                                 <span onClick={() => props.delete(element.id)}>
                                     <Icon link name='close' />
                                 </span>
