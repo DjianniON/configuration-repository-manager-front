@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Table, Icon, Container, Button, Header } from 'semantic-ui-react';
+import { Segment, List, Container, Button, Header } from 'semantic-ui-react';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
+import ReadList from './list/readList';
+import ObjetsList from './list/objetsList';
 
 
 export default function ReadRootList() {
@@ -19,13 +21,13 @@ export default function ReadRootList() {
             .then((response) => {
                 setAPIData(response.data);
                 axios.get(`http://localhost:8080/api/v1/configuration/${configuration}`, {
-            headers: {
-                "Content-type": "application/json"
-            }
-        }).then((response) => {
-            setConfigName(response.data.nom);
+                    headers: {
+                        "Content-type": "application/json"
+                    }
+                }).then((response) => {
+                    setConfigName(response.data.nom);
+                })
             })
-        })
     }, [])
 
     const deleteObject = (id) => {
@@ -43,55 +45,17 @@ export default function ReadRootList() {
     return (
         <Container>
             <Header as="h1">Liste des objets de {ConfigName}</Header>
-            <Header></Header>
-            <Table singleLine>
-                <Table.Header>
-                    <Table.Row>
-                        <Table.HeaderCell>Nom de l'objet</Table.HeaderCell>
-                        <Table.HeaderCell>Voir</Table.HeaderCell>
-                        <Table.HeaderCell>Editer</Table.HeaderCell>
-                        <Table.HeaderCell>Exporter</Table.HeaderCell>
-                        <Table.HeaderCell>Supprimer</Table.HeaderCell>
-                    </Table.Row>
-                </Table.Header>
-                <Table.Body>
-                    {APIData.map((objet) => {
-                        return (
-                            <Table.Row>
-                                <Table.Cell>{objet.nom}</Table.Cell>
-                                <Table.Cell>
-                                    <Link
-                                        to={`${objet.id}`}
-                                        key={objet.id}
-                                    >
-                                        <Icon link name='eye' />
-                                    </Link>
-                                </Table.Cell>
-                                <Table.Cell>
-                                    <Link
-                                        to={`/objects/${objet.id}/edit`}
-                                        key={objet.id}
-                                    >
-                                        <Icon link name='edit' />
-                                    </Link>
-                                </Table.Cell>
-                                <Table.Cell>
-                                    <span onClick={() => exportObject(objet.id)}>
-                                        <Icon link name='download' />
-                                    </span>
-                                </Table.Cell>
-                                <Table.Cell>
-                                    <span onClick={() => deleteObject(objet.id)}>
-                                        <Icon link name='close' />
-                                    </span>
-                                </Table.Cell>
-                            </Table.Row>
+                <Segment textAlign="left">
+                    <List size="large" verticalAlign='middle'>
+                        {APIData.map((objet) => {
+                            return (
+                                <ObjetsList objet={objet} delete={deleteObject} />
+                            )
+                        }
                         )
-                    }
-                    )
-                    }
-                </Table.Body>
-            </Table>
+                        }
+                    </List>
+                </Segment>
             <Link to={`/objects/${configuration}/create`}><Button color='green'>Nouvel objet</Button></Link>
         </Container>
     )
