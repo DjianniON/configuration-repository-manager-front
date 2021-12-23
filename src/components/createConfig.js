@@ -27,7 +27,7 @@ export default function CreateConfig() {
     return (
             <Container>
                 <Header as="h1">Créer une configuration</Header>
-                <BasicForm nom={nom} description={description} setNom={setConfigName} setDescription={setConfigName} operation={createConfig} />
+                <BasicForm nom={nom} description={description} setNom={setConfigName} setDescription={setConfigDescription} operation={createConfig} />
             </Container>
     )
 }

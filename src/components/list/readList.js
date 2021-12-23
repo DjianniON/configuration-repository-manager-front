@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 export default function ReadList(props) {
     let elements = props.referentiels ? props.referentiels : props.configurations ? props.configurations : props.objets ? props.objets : [];
     return (
-        <DimmerDimmable as={Segment} dimmed={props.active} blurring={props.active} basic loading={props.active} >
+        <DimmerDimmable as={Segment} dimmed={props.active} basic loading={props.active} blurring>
             <Table>
                 <Table.Header>
                     <Table.Row>

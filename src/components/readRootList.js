@@ -10,6 +10,7 @@ export default function ReadRootList() {
     let configuration = parseInt(params.configId, 10);
     const [APIData, setAPIData] = useState([]);
     const [ConfigName, setConfigName] = useState('');
+    const [ConfigDescription, setConfigDescription] = useState('');
     const [active, setActive] = useState(true);
     const [activeMain, setActiveMain] = useState(true);
     const [currentObject, setCurrentObject] = useState([]);
@@ -28,6 +29,7 @@ export default function ReadRootList() {
             }
         }).then((response) => {
             setConfigName(response.data.nom);
+            setConfigDescription(response.data.description);
             setActiveMain(false);
             axios.get(`http://localhost:8080/api/v1/configuration/${configuration}/objets`, {
                 headers: {
@@ -59,7 +61,8 @@ export default function ReadRootList() {
     return (
         <Container>
             <Header as="h1" textAlign='center'>{ConfigName}</Header>
-            <DimmerDimmable as={Segment} textAlign="left" padded='very' loading={active} dimmed={active} blurring={active}>               
+            <Header as="h4" textAlign='center'>{ConfigDescription}</Header>
+            <DimmerDimmable as={Segment} textAlign="left" padded='very' loading={active} dimmed={active} blurring>               
                 <List size="large" verticalAlign='middle'>
                     {APIData.map((objet) => {
                         return (
@@ -70,9 +73,9 @@ export default function ReadRootList() {
                     }
                 </List>
             </DimmerDimmable>
-            <Link to={`/objects/${configuration}/create`}><Button color='green'>Nouvel objet</Button></Link>
+            <Button as={Link} to={`create`} color='green'>Nouvel objet</Button>
             <DeleteModal open={openModal} setOpen={setOpenModal} element={currentObject} deleteElement={deleteObject} />
-            <Dimmer active={activeMain} blurring inverted>
+            <Dimmer active={activeMain} inverted>
                 <Loader>Chargement en cours...</Loader>
             </Dimmer>
         </Container>
