@@ -9,36 +9,37 @@ import ReadRefList from './components/readRefList';
 import ReadObjetList from './components/readObjetList';
 import UpdateConfig from './components/updateConfig';
 import UpdateRef from './components/updateRef';
-import { BrowserRouter as Router, Routes, Route, Outlet } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Outlet, Link } from 'react-router-dom';
 import UpdateObjet from './components/updateObjet';
-import { Container, Divider } from 'semantic-ui-react';
+import { Container, Icon, Menu } from 'semantic-ui-react';
 
 function App() {
   return (
-    <Container>
-      <Router>
-        <div className="App">
-        <Divider hidden />
+    <div className="App">
+      <Router>  
+        <Container fluid>
           <Routes>
             <Route path="/" element={<ReadRefList />} />
             <Route path="create" element={<CreateRef />} />
             <Route path=":id" element={<Outlet />} >
+              <Route path="objets/create" element={<CreateObjet type='referentiel' />} />
+              <Route path="objets/:objectId" element={<Outlet />} >
+                <Route path="edit" element={<UpdateObjet />} />
+                <Route path="create" element={<CreateObjet type='objet' />} />
+              </Route>
               <Route path="configurations/create" element={<CreateConfig />} />
               <Route path="configurations/:configId" element={<Outlet />} >
                 <Route index element={<ReadRootList />} />
                 <Route path="edit" element={<UpdateConfig />} />
+                <Route path="create" element={<CreateObjet type='configuration' />} />
                 <Route path=":objectId" element={<Outlet />} >
                   <Route index element={<ReadObjetList />} />
                   <Route path="edit" element={<UpdateObjet />} />
-                  <Route path="create" element={<CreateObjet />} />
+                  <Route path="create" element={<CreateObjet type='objet' />} />
                 </Route>
               </Route>
               <Route index element={<ReadConfigList />} />
               <Route path="edit" element={<UpdateRef />} />
-            </Route>
-            <Route path="objects/:objectId" element={<Outlet />} >
-              <Route path="edit" element={<UpdateObjet />} />
-              <Route path="create" element={<CreateObjet />} />
             </Route>
             <Route
               path="*"
@@ -49,9 +50,10 @@ function App() {
               }
             />
           </Routes>
-        </div>
+        </Container>
       </Router>
-    </Container>
+
+    </div>
   );
 }
 

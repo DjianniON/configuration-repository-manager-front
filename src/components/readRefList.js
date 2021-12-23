@@ -47,7 +47,7 @@ export default function ReadRefList() {
 
     return (
         <Container>
-            <Header as="h1">Liste des référentiels</Header>
+            <Header className='title-header' as="h1">Liste des référentiels</Header>
             <ReadList referentiels={APIData} type="Référentiel" links="" deleteElement={openDeleteModal} export={exportRef} active={active} />
             <Link to="/create"><Button color='green'>Nouveau référentiel</Button></Link>
             <DeleteModal open={openModal} setOpen={setOpenModal} element={currentElement} deleteElement={deleteRef} />
