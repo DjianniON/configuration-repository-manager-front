@@ -12,7 +12,7 @@ export default function ObjetsList(props) {
                 <List.Header>
                     {objet.nom}
                     <List.Content floated="right">
-                        <span onClick={() => props.delete(objet.id)}>
+                        <span onClick={() => props.deleteObjet(objet)}>
                             <Icon link name='close' />
                         </span>
                     </List.Content>
@@ -31,7 +31,7 @@ export default function ObjetsList(props) {
                 <Divider />
                 {objet.objetsEnfants ?
                     <List.List>
-                        {objet.objetsEnfants.map(enfant => <ObjetsList key={enfant.id} objet={enfant} />)}
+                        {objet.objetsEnfants.map(enfant => <ObjetsList key={enfant.id} objet={enfant}  deleteObjet={props.deleteObjet} />)}
                     </List.List> : null}
             </List.Content>
         </List.Item>

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Grid, Table, Button, Icon, Header } from 'semantic-ui-react'
+import { Container, Grid, Table, Button, Icon, Header, DimmerDimmable, Segment } from 'semantic-ui-react'
 import axios from 'axios';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import ObjetsTable from './list/objetsTable';
+import DeleteModal from './deleteModal';
 
 export default function ReadObjetList() {
     let params = useParams();
@@ -11,7 +12,17 @@ export default function ReadObjetList() {
     const [ObjectName, setObjectName] = useState('');
     const [ObjectData, setObjectData] = useState([]);
     const [APIData, setAPIData] = useState([]);
+    const [active, setActive] = useState(true);
+    const [currentElement, setCurrentElement] = useState([]);
+    const [openModal, setOpenModal] = useState(false);
+    const [type, setType] = useState('');
+
     useEffect(() => {
+        getData();
+    }, [objet])
+
+    const getData = () => {
+        setActive(true);
         axios.get(`http://localhost:8080/api/v1/objet/${objet}/objets`, {
             headers: {
                 "Content-type": "application/json"
@@ -27,31 +38,38 @@ export default function ReadObjetList() {
                     .then((response) => {
                         setObjectName(response.data.nom);
                         setObjectData(response.data.proprietes);
+                        setActive(false);
                     })
             })
-    }, [objet])
+    }
 
     const deleteObject = (id) => {
+        axios.delete(`http://localhost:8080/api/v1/objet/${id}`)
+        .then(() => {
+            getData();
+            setOpenModal(false);
+        })
+    }
+
+    const deleteParameter = (id) => {
         console.log("delete " + id);
-        /*axios.delete(`localhost:8080/api/v1/objet/${id}`)
+        setOpenModal(false);
+        /*axios.delete(`http://localhost:8080/api/v1/parameter/${id}`)
         .then(() => {
             getData();
         })*/
     }
 
-    const deleteParameter = (id) => {
-        console.log("delete " + id);
-        /*axios.delete(`localhost:8080/api/v1/parameter/${id}`)
-        .then(() => {
-            getData();
-        })*/
+    const openDeleteModal = (config) => {
+        setCurrentElement(config);
+        setOpenModal(true);
     }
 
     return (
         <Container>
             <Header as="h1">Liste des objets de {ObjectName}</Header>
             <Icon name='arrow left' onClick={() => navigation(-1)} />
-            <Container>
+            <DimmerDimmable as={Segment} basic loading={active} dimmed={active} blurring={active}>
                     <Grid columns="2" relaxed='very' celled>
                         <Grid.Column>
                             <Header>Enfants de {ObjectName}</Header>
@@ -60,15 +78,15 @@ export default function ReadObjetList() {
                                         <Table.Header>
                                             <Table.Row>
                                                 <Table.HeaderCell>Objet</Table.HeaderCell>
-                                                <Table.HeaderCell>Voir</Table.HeaderCell>
-                                                <Table.HeaderCell>Editer</Table.HeaderCell>
-                                                <Table.HeaderCell>Supprimer</Table.HeaderCell>
+                                                <Table.HeaderCell textAlign='center' width={1}>Voir</Table.HeaderCell>
+                                                <Table.HeaderCell textAlign='center' width={1}>Editer</Table.HeaderCell>
+                                                <Table.HeaderCell textAlign='center' width={1}>Supprimer</Table.HeaderCell>
                                             </Table.Row>
                                         </Table.Header>
                                         <Table.Body>
                                             {APIData.map((objet) => {
                                                 return (
-                                                    <ObjetsTable key={objet.id} objet={objet} link="../.." delete={deleteObject} />
+                                                    <ObjetsTable key={objet.id} objet={objet} link="../.." deleteElement={openDeleteModal}  type="objet" setType={setType} />
                                                 )
                                             }
                                             )
@@ -85,16 +103,16 @@ export default function ReadObjetList() {
                                     <Table.Header>
                                         <Table.Row>
                                             <Table.HeaderCell>Paramètre</Table.HeaderCell>
-                                            <Table.HeaderCell>Voir</Table.HeaderCell>
-                                            <Table.HeaderCell>Editer</Table.HeaderCell>
-                                            <Table.HeaderCell>Supprimer</Table.HeaderCell>
+                                            <Table.HeaderCell textAlign='center' width={1}>Voir</Table.HeaderCell>
+                                            <Table.HeaderCell textAlign='center' width={1}>Editer</Table.HeaderCell>
+                                            <Table.HeaderCell textAlign='center' width={1}>Supprimer</Table.HeaderCell>
                                         </Table.Row>
                                     </Table.Header>
                                     <Table.Body>
                                         {
                                             ObjectData.map((parametre) => {
                                                 return (
-                                                    <ObjetsTable key={parametre.id} objet={parametre} link="parametres" delete={deleteParameter} />
+                                                    <ObjetsTable key={parametre.id} objet={parametre} link="parametres" deleteElement={openDeleteModal} type="parametre" setType={setType} />
                                                 )
                                             }
                                             )
@@ -105,7 +123,8 @@ export default function ReadObjetList() {
                                 <Link to={`/objects/${objet}/create`}><Button type='creerPara'>Nouveau Paramètre</Button></Link>
                         </Grid.Column>
                     </Grid>
-            </Container>
+            </DimmerDimmable>
+            <DeleteModal open={openModal} setOpen={setOpenModal} element={currentElement} deleteElement={type === 'objet' ? deleteObject : deleteParameter} />
         </Container>
     )
 }

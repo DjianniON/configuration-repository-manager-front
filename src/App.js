@@ -16,9 +16,9 @@ import { Container, Divider } from 'semantic-ui-react';
 function App() {
   return (
     <Container>
-      <Divider hidden />
       <Router>
         <div className="App">
+        <Divider hidden />
           <Routes>
             <Route path="/" element={<ReadRefList />} />
             <Route path="create" element={<CreateRef />} />
@@ -48,7 +48,6 @@ function App() {
                 </main>
               }
             />
-
           </Routes>
         </div>
       </Router>
