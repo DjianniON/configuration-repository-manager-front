@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Header } from 'semantic-ui-react';
+import { Grid, Segment, Header } from 'semantic-ui-react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import BasicForm from './form/basicForm';
@@ -19,7 +19,7 @@ export default function UpdateRef() {
             console.log(response.data);
             setRefName(response.data.nom);
             setRefDescription(response.data.description);
-        })      
+        })
     }, []);
 
     const updateRef = () => {
@@ -32,9 +32,13 @@ export default function UpdateRef() {
     }
 
     return (
-        <Container>
-            <Header as="h1">Modifier le référentiel</Header>
-            <BasicForm nom={nom} description={description} setNom={setRefName} setDescription={setRefDescription} operation={updateRef} type="update" />
-        </Container>
+        <Grid style={{ height: '100vh' }} verticalAlign='middle' textAlign='center'>
+            <Grid.Column style={{ maxWidth: '50%' }}>
+                <Segment padded="very">
+                    <Header as="h1">Modifier le référentiel</Header>
+                    <BasicForm nom={nom} description={description} setNom={setRefName} setDescription={setRefDescription} operation={updateRef} type="update" />
+                </Segment>
+            </Grid.Column>
+        </Grid>
     )
 }

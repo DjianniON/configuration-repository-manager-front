@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Header  } from 'semantic-ui-react';
+import { Grid, Header, Segment  } from 'semantic-ui-react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import BasicForm from './form/basicForm';
@@ -32,9 +32,13 @@ export default function UpdateConfig() {
     }
 
     return (
-        <Container>
+        <Grid style={{ height: '100vh' }} verticalAlign='middle' textAlign='center'>
+        <Grid.Column style={{ maxWidth: '50%' }}>
+            <Segment padded="very">
             <Header as="h1">Modifier la configuration</Header>
             <BasicForm nom={nom} description={description} setNom={setConfigName} setDescription={setConfigDescription} operation={updateConfig} type="update" />
-        </Container>
+            </Segment>
+            </Grid.Column>
+        </Grid>
     )
 }

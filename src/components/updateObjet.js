@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Header, Container } from 'semantic-ui-react';
+import { Header, Grid, Segment } from 'semantic-ui-react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import BasicForm from './form/basicForm';
@@ -32,9 +32,13 @@ export default function UpdateObjet() {
     }
 
     return (
-        <Container>
-            <Header as="h1">Modifier l'objet</Header>
-            <BasicForm nom={nom} description={description} setNom={setObjectName} setDescription={setObjectDescription} operation={updateObject} type="update" />
-        </Container>
+        <Grid style={{ height: '100vh' }} verticalAlign='middle' textAlign='center'>
+            <Grid.Column style={{ maxWidth: '50%' }}>
+                <Segment padded="very">
+                    <Header as="h1">Modifier l'objet</Header>
+                    <BasicForm nom={nom} description={description} setNom={setObjectName} setDescription={setObjectDescription} operation={updateObject} type="update" />
+                </Segment>
+            </Grid.Column>
+        </Grid>
     )
 }
