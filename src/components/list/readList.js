@@ -20,12 +20,11 @@ export default function ReadList(props) {
                 <Table.Body>
                     {elements.map((element) => {
                         return (
-                            <Table.Row>
+                            <Table.Row key={element.id}>
                                 <Table.Cell>{element.nom}</Table.Cell>
                                 <Table.Cell textAlign='center'>
                                     <Link
                                         to={`${props.links}${element.id}`}
-                                        key={element.id}
                                     >
                                         <Icon link name='eye' />
                                     </Link>
@@ -33,7 +32,6 @@ export default function ReadList(props) {
                                 <Table.Cell textAlign='center'>
                                     <Link
                                         to={`${props.links}${element.id}/edit`}
-                                        key={element.id}
                                     >
                                         <Icon link name='edit' />
                                     </Link>
