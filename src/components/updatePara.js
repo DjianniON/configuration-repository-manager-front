@@ -1,32 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import { Grid, Header, Segment  } from 'semantic-ui-react';
-import { useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import ParaForm from './form/paraForm';
 
 export default function UpdatePara() {
     let navigation = useNavigate();
+    let params = useParams();
+    let objet = parseInt(params.objectId, 10);
     const [nom, setParaName] = useState('');
-    const [type, setParaType] = useState('');
+    const [typePara, setParaType] = useState('');
     const [valeur, setParaValeur] = useState('');
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/v1/parametre/`, {
+        axios.get(`http://localhost:8080/api/v1/objet/${objet}/propriete`, {
             headers: {
                 "Content-type": "application/json"
             }
         }).then((response) => {
             console.log(response.data);
             setParaName(response.data.nom);
-            setParaType(response.data.type);
+            setParaType(response.data.typePara);
             setParaValeur(response.date.valeur);
         })      
     }, []);
 
     const updatePara = () => {
-        axios.patch(`http://localhost:8080/api/v1/parametre/`, {
+        axios.patch(`http://localhost:8080/api/v1/objet/${objet}/propriete`, {
             nom,
-            type,
+            typePara,
             valeur
         }).then(() => {
             navigation(-1)
@@ -38,9 +40,9 @@ export default function UpdatePara() {
         <Grid.Column style={{ maxWidth: '50%' }}>
             <Segment padded="very">
             <Header as="h1">Modifier le paramètre</Header>
-            <ParaForm nom={nom} type={type} valeur={valeur} setNom={setParaName} setType={setParaType} setValeur={setParaValeur} operation={updatePara} type="update" />
+            <ParaForm nom={nom} typePara={typePara} valeur={valeur} setNom={setParaName} setType={setParaType} setValeur={setParaValeur} operation={updatePara} type='update'/>
             </Segment>
             </Grid.Column>
-        </Grid>
+        </Grid> 
     )
 }

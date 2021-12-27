@@ -19,7 +19,7 @@ export default function ParaForm(props) {
             </Form.Field>
             <Form.Field>
                 <label>Type</label>
-                <TextArea placeholder='Type' value={props.type} onChange={(e) => props.setType(e.target.value)} />
+                <TextArea placeholder='Type' value={props.typePara} onChange={(e) => props.setType(e.target.value)} />
             </Form.Field>
             <Form.Field>
                 <label>Valeur</label>
