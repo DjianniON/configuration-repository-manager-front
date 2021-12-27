@@ -12,6 +12,7 @@ import UpdateRef from './components/updateRef';
 import { BrowserRouter as Router, Routes, Route, Outlet } from 'react-router-dom';
 import UpdateObjet from './components/updateObjet';
 import { Container } from 'semantic-ui-react';
+import ErrorNotFound from './components/errorNotFound';
 
 function App() {
   return (
@@ -27,6 +28,11 @@ function App() {
                 <Route index element={<ReadObjetList />} />
                 <Route path="edit" element={<UpdateObjet />} />
                 <Route path="create" element={<CreateObjet type='objet' />} />
+                <Route path="parametres/create" element={} />
+                  <Route path="parametres/:paramId" element={} >
+                    <Route index element={} />
+                    <Route path="edit" element={} />
+                  </Route>
               </Route>
               <Route path="configurations/create" element={<CreateConfig />} />
               <Route path="configurations/:configId" element={<Outlet />} >
@@ -37,6 +43,11 @@ function App() {
                   <Route index element={<ReadObjetList />} />
                   <Route path="edit" element={<UpdateObjet />} />
                   <Route path="create" element={<CreateObjet type='objet' />} />
+                  <Route path="parametres/create" element={} />
+                  <Route path="parametres/:paramId" element={} >
+                    <Route index element={} />
+                    <Route path="edit" element={} />
+                  </Route>
                 </Route>
               </Route>
               <Route index element={<ReadConfigList />} />
@@ -44,11 +55,7 @@ function App() {
             </Route>
             <Route
               path="*"
-              element={
-                <main style={{ padding: "1rem" }}>
-                  <p>404</p>
-                </main>
-              }
+              element={<ErrorNotFound />}
             />
           </Routes>
         </Container>

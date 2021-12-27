@@ -29,9 +29,9 @@ export default function ObjetsList(props) {
                 </List.Header>
                 <List.Description>{objet.description}</List.Description>
                 <Divider />
-                {objet.objetsEnfants ?
+                {objet.objets ?
                     <List.List>
-                        {objet.objetsEnfants.map(enfant => <ObjetsList key={enfant.id} objet={enfant}  deleteObjet={props.deleteObjet} />)}
+                        {objet.objets.map(enfant => <ObjetsList key={enfant.id} objet={enfant}  deleteObjet={props.deleteObjet} />)}
                     </List.List> : null}
             </List.Content>
         </List.Item>
