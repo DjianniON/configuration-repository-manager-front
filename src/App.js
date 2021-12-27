@@ -13,6 +13,8 @@ import { BrowserRouter as Router, Routes, Route, Outlet } from 'react-router-dom
 import UpdateObjet from './components/updateObjet';
 import { Container } from 'semantic-ui-react';
 import ErrorNotFound from './components/errorNotFound';
+import CreatePara from './components/createPara';
+import UpdatePara from './components/updatePara';
 
 function App() {
   return (
@@ -28,10 +30,10 @@ function App() {
                 <Route index element={<ReadObjetList />} />
                 <Route path="edit" element={<UpdateObjet />} />
                 <Route path="create" element={<CreateObjet type='objet' />} />
-                <Route path="parametres/create" element={} />
-                  <Route path="parametres/:paramId" element={} >
-                    <Route index element={} />
-                    <Route path="edit" element={} />
+                <Route path="parametres/create" element={<CreatePara/>} />
+                  <Route path="parametres/:paramId" element={<Outlet />} >
+                    <Route index element={<Outlet/>} />
+                    <Route path="edit" element={<UpdatePara/>} />
                   </Route>
               </Route>
               <Route path="configurations/create" element={<CreateConfig />} />
@@ -43,10 +45,10 @@ function App() {
                   <Route index element={<ReadObjetList />} />
                   <Route path="edit" element={<UpdateObjet />} />
                   <Route path="create" element={<CreateObjet type='objet' />} />
-                  <Route path="parametres/create" element={} />
-                  <Route path="parametres/:paramId" element={} >
-                    <Route index element={} />
-                    <Route path="edit" element={} />
+                  <Route path="parametres/create" element={<CreatePara/>} />
+                  <Route path="parametres/:paramId" element={<Outlet/>} >
+                    <Route index element={<Outlet/>} />
+                    <Route path="edit" element={<UpdatePara/>} />
                   </Route>
                 </Route>
               </Route>

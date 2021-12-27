@@ -134,7 +134,7 @@ export default function ReadObjetList() {
                                 </Table.Body>
                             </Table>
                             : <Header>Aucun paramètre</Header>}
-                        <Button as={Link} to={`/parametres/${objet}/create`} type='creerPara'>Nouveau Paramètre</Button>
+                        <Button as={Link} to={`parametres/create`} type='creerPara'>Nouveau Paramètre</Button>
                     </Grid.Column>
                 </Grid>
             </DimmerDimmable>
