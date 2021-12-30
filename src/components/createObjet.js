@@ -12,8 +12,8 @@ export default function CreateObjet(props) {
     const [nom, setObjetName] = useState('');
     const [description, setObjetDescription] = useState('');
     useEffect(() => {
-        setObjetName(localStorage.getItem('objetName'));
-        setObjetDescription(localStorage.getItem('objetDescription'));
+        setObjetName(localStorage.getItem('nom'));
+        setObjetDescription(localStorage.getItem('description'));
     }, []);
     const createObjet = () => {
         axios.post(`http://localhost:8080/api/v1/objet/${objet}/objet`, {

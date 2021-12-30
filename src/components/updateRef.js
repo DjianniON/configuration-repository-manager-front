@@ -16,7 +16,6 @@ export default function UpdateRef() {
                 "Content-type": "application/json"
             }
         }).then((response) => {
-            console.log(response.data);
             setRefName(response.data.nom);
             setRefDescription(response.data.description);
         })

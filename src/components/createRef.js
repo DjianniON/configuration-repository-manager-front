@@ -9,7 +9,7 @@ export default function CreateRef() {
     const [nom, setRefName] = useState('');
     const [description, setRefDescription] = useState('');
     useEffect(() => {
-        setRefName(localStorage.getItem('configuration'));
+        setRefName(localStorage.getItem('nom'));
         setRefDescription(localStorage.getItem('description'));
     }, []);
 

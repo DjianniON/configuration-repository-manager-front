@@ -16,7 +16,6 @@ export default function UpdateConfig() {
                 "Content-type": "application/json"
             }
         }).then((response) => {
-            console.log(response.data);
             setConfigName(response.data.nom);
             setConfigDescription(response.data.description);
         })      

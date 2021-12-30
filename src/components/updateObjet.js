@@ -16,7 +16,6 @@ export default function UpdateObjet() {
                 "Content-type": "application/json"
             }
         }).then((response) => {
-            console.log(response.data);
             setObjectName(response.data.nom);
             setObjectDescription(response.data.description);
         })

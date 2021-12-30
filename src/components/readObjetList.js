@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Grid, Table, Button, Icon, Header, DimmerDimmable, Segment } from 'semantic-ui-react'
+import { Container, Grid, Table, Button, Header, DimmerDimmable, Segment } from 'semantic-ui-react'
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
 import ObjetsTable from './list/objetsTable';
@@ -51,13 +51,12 @@ export default function ReadObjetList() {
             })
     }
 
-    const deleteParameter = (id) => {
-        console.log("delete " + id);
-        setOpenModal(false);
-        /*axios.delete(`http://localhost:8080/api/v1/parameter/${id}`)
+    const deletePropriete = (id) => {
+        axios.delete(`http://localhost:8080/api/v1/propriete/${id}`)
         .then(() => {
             getData();
-        })*/
+            setOpenModal(false);
+        })
     }
 
     const openDeleteModal = (config) => {
@@ -104,12 +103,12 @@ export default function ReadObjetList() {
                         <Button as={Link} type='creerObjet' to={`../../${objet}/create`}>Nouvel Objet</Button>
                     </Grid.Column>
                     <Grid.Column>
-                        <Header>Paramètres de {ObjectName}</Header>
+                        <Header>Propriétés de {ObjectName}</Header>
                         {ObjectData.length ?
                             <Table singleLine>
                                 <Table.Header>
                                     <Table.Row>
-                                        <Table.HeaderCell>Paramètre</Table.HeaderCell>
+                                        <Table.HeaderCell>Propriété</Table.HeaderCell>
                                         <Table.HeaderCell textAlign='center' width={1}>Voir</Table.HeaderCell>
                                         <Table.HeaderCell textAlign='center' width={1}>Editer</Table.HeaderCell>
                                         <Table.HeaderCell textAlign='center' width={1}>Supprimer</Table.HeaderCell>
@@ -122,7 +121,7 @@ export default function ReadObjetList() {
                                                 <ObjetsTable
                                                     key={parametre.id}
                                                     objet={parametre}
-                                                    link="parametres"
+                                                    link="proprietes"
                                                     deleteElement={openDeleteModal}
                                                     type="parametre"
                                                     setType={setType}
@@ -133,8 +132,8 @@ export default function ReadObjetList() {
                                     }
                                 </Table.Body>
                             </Table>
-                            : <Header>Aucun paramètre</Header>}
-                        <Button as={Link} to={`/parametres/${objet}/create`} type='creerPara'>Nouveau Paramètre</Button>
+                            : <Header>Aucune propriété</Header>}
+                        <Button as={Link} to={`proprietes/create`} type='creerPara'>Nouvelle propriété</Button>
                     </Grid.Column>
                 </Grid>
             </DimmerDimmable>
@@ -142,7 +141,7 @@ export default function ReadObjetList() {
                 open={openModal}
                 setOpen={setOpenModal}
                 element={currentElement}
-                deleteElement={type === 'objet' ? deleteObject : deleteParameter}
+                deleteElement={type === 'objet' ? deleteObject : deletePropriete}
             />
         </Container>
     )

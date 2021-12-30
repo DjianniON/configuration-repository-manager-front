@@ -11,12 +11,12 @@ export default function CreateConfig() {
     const [nom, setConfigName] = useState('');
     const [description, setConfigDescription] = useState('');
     useEffect(() => {
-        setConfigName(localStorage.getItem('configuration'));
+        setConfigName(localStorage.getItem('nom'));
         setConfigDescription(localStorage.getItem('description'));
     }, []);
 
     const createConfig = () => {
-        axios.post(`http://localhost:8080/api/v1/referentiel/${referentiel}/configuration/`, {
+        axios.post(`http://localhost:8080/api/v1/referentiel/${referentiel}/configuration`, {
             nom,
             description
         }).then(() => {
