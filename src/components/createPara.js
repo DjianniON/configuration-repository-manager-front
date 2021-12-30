@@ -20,7 +20,7 @@ export default function CreatePara() {
     const createPara = () => {
         axios.post(`http://localhost:8080/api/v1/objet/${objet}/propriete`, {
             nom,
-            typePara,
+            type: typePara,
             valeur
         }).then(() => {
             navigation(-1)
