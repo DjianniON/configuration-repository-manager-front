@@ -54,10 +54,10 @@ export default function ReadObjetList() {
     const deleteParameter = (id) => {
         console.log("delete " + id);
         setOpenModal(false);
-        /*axios.delete(`http://localhost:8080/api/v1/parameter/${id}`)
+        axios.delete(`http://localhost:8080/api/v1/objet/${id}`)
         .then(() => {
             getData();
-        })*/
+        })
     }
 
     const openDeleteModal = (config) => {

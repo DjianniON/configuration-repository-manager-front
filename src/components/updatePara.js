@@ -5,8 +5,8 @@ import axios from 'axios';
 import ParaForm from './form/paraForm';
 
 export default function UpdatePara() {
-    let navigation = useNavigate();
     let params = useParams();
+    let navigation = useNavigate();
     let objet = parseInt(params.objectId, 10);
     const [nom, setParaName] = useState('');
     const [typePara, setParaType] = useState('');
