@@ -1,10 +1,11 @@
 import React from 'react'
-import { Icon, Menu, Button, MessageHeader, Message } from 'semantic-ui-react'
+import { Icon, Menu, Button, MessageHeader, Message, Container } from 'semantic-ui-react'
 import { useNavigate, Link } from 'react-router-dom';
 
 export default function ErrorNotFound() {
     let navigation = useNavigate();
     return (
+        <Container>
         <Menu secondary pointing>
             <Menu.Item as={Button} onClick={() => navigation(-1)} name='back'>
                 <Icon name='left arrow' />
@@ -17,9 +18,14 @@ export default function ErrorNotFound() {
                 </Menu.Item>
             </Menu.Menu>
             
-            <Message>
-                <MessageHeader>Accès interdit</MessageHeader>
-            </Message>
+            
         </Menu>
+
+        <Message negative>
+            <MessageHeader>Accès interdit</MessageHeader>
+            <p>Veuillez retourner en arrière.</p>
+        </Message>
+            
+        </Container>
     )
 }

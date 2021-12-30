@@ -7,13 +7,13 @@ import ParaForm from './form/paraForm';
 export default function UpdatePara() {
     let params = useParams();
     let navigation = useNavigate();
-    let objet = parseInt(params.objectId, 10);
+    let parametre = parseInt(params.paramId, 10);
     const [nom, setParaName] = useState('');
     const [typePara, setParaType] = useState('');
     const [valeur, setParaValeur] = useState('');
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/v1/objet/${objet}/propriete`, {
+        axios.get(`http://localhost:8080/api/v1/propriete/${parametre}`, {
             headers: {
                 "Content-type": "application/json"
             }
@@ -21,15 +21,15 @@ export default function UpdatePara() {
             console.log(response.data);
             setParaName(response.data.nom);
             setParaType(response.data.typePara);
-            setParaValeur(response.date.valeur);
+            setParaValeur(response.data.valeur);
         })      
     }, []);
 
     const updatePara = () => {
-        axios.patch(`http://localhost:8080/api/v1/objet/${objet}/propriete`, {
+        axios.patch(`http://localhost:8080/api/v1/propriete/${parametre}`, {
             nom,
             typePara,
-            valeur
+            valeur  
         }).then(() => {
             navigation(-1)
         })
