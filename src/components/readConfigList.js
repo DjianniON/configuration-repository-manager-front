@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Button, Header, DimmerDimmable, Segment, List } from 'semantic-ui-react';
+import { Container, Button, Header, DimmerDimmable, Segment, List, Tab } from 'semantic-ui-react';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
 import ReadList from './list/readList';
@@ -95,24 +95,40 @@ export default function ReadConfigList() {
         console.log("Export " + id);
     }
 
+    const panes = [
+        {
+            menuItem: 'Liste des configurations',
+            render: () => <Tab.Pane attached={false} as={Container} loading={active}>
+                <Header as="h1">Liste des configurations de {refNom}</Header>
+                <ReadList configurations={referentielConfigs} type="Configuration" links="configurations/" deleteElement={openDeleteModal} export={exportConfiguration} active={active} />
+                <Link to="configurations/create"><Button color='green'>Nouvelle configuration</Button></Link>
+            </Tab.Pane>,
+        },
+        {
+            menuItem: 'Modèle d\'objets',
+            render: () => <Tab.Pane attached={false} as={Container}>
+                <Header as="h1">Modèle d'objets de {refNom}</Header>
+                <DimmerDimmable as={Segment} textAlign="left" padded='very' loading={active} dimmed={active} blurring>
+                    <List size="large" verticalAlign='middle'>
+                        {referentielObjets.map((objet) => {
+                            return (
+                                <ObjetsList key={objet.id} objet={objet} deleteObjet={openDeleteObjetModal} />
+                            )
+                        }
+                        )
+                        }
+                    </List>
+                </DimmerDimmable>
+                <Button as={Link} to={`objets/create`} color='green'>Nouvel objet</Button>
+            </Tab.Pane>,
+        },
+    ]
+
     return (
         <Container>
             <ContextMenu nom={refNom} />
-            <Header as="h1">Liste des configurations</Header>
-            <ReadList configurations={referentielConfigs} type="Configuration" links="configurations/" deleteElement={openDeleteModal} export={exportConfiguration} active={active} />
-            <Link to="configurations/create"><Button color='green'>Nouvelle configuration</Button></Link>
-            <DimmerDimmable as={Segment} textAlign="left" padded='very' loading={active} dimmed={active} blurring>
-                <List size="large" verticalAlign='middle'>
-                    {referentielObjets.map((objet) => {
-                        return (
-                            <ObjetsList key={objet.id} objet={objet} deleteObjet={openDeleteObjetModal} />
-                        )
-                    }
-                    )
-                    }
-                </List>
-            </DimmerDimmable>
-            <Button as={Link} to={`objets/create`} color='green'>Nouvel objet</Button>
+
+            <Tab menu={{ secondary: true, pointing: true  }} panes={panes} />
             <DeleteModal open={openModal} setOpen={setOpenModal} element={currentElement} deleteElement={isConfig ? deleteConfiguration : deleteObjet} />
         </Container>
     )

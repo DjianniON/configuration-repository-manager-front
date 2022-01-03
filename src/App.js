@@ -15,6 +15,7 @@ import { Container } from 'semantic-ui-react';
 import ErrorNotFound from './components/errorNotFound';
 import UpdatePropriete from './components/updatePropriete';
 import CreatePropriete from './components/createPropriete';
+import ReadPropriete from './components/readPropriete';
 
 function App() {
   return (
@@ -31,10 +32,10 @@ function App() {
                 <Route path="edit" element={<UpdateObjet />} />
                 <Route path="create" element={<CreateObjet type='objet' />} />
                 <Route path="proprietes/create" element={<CreatePropriete />} />
-                  <Route path="proprietes/:paramId" element={<Outlet />} >
-                    <Route index element={<Outlet/>} />
-                    <Route path="edit" element={<UpdatePropriete/>} />
-                  </Route>
+                <Route path="proprietes/:paramId" element={<Outlet />} >
+                  <Route index element={<ReadPropriete />} />
+                  <Route path="edit" element={<UpdatePropriete />} />
+                </Route>
               </Route>
               <Route path="configurations/create" element={<CreateConfig />} />
               <Route path="configurations/:configId" element={<Outlet />} >
@@ -47,8 +48,8 @@ function App() {
                   <Route path="create" element={<CreateObjet type='objet' />} />
                   <Route path="proprietes/create" element={<CreatePropriete />} />
                   <Route path="proprietes/:paramId" element={<Outlet />} >
-                    <Route index element={<Outlet/>} />
-                    <Route path="edit" element={<UpdatePropriete/>} />
+                    <Route index element={<ReadPropriete />} />
+                    <Route path="edit" element={<UpdatePropriete />} />
                   </Route>
                 </Route>
               </Route>
