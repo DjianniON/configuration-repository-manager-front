@@ -49,9 +49,6 @@ export default function ReadRootList() {
                 getData();
                 setOpenModal(false);
             })
-            .catch(() => {
-                console.log('fail');
-            })
     }
 
     const openDeleteModal = (objet) => {
@@ -64,8 +61,8 @@ export default function ReadRootList() {
             <ContextMenu nom={ConfigName} />
             <Header as="h1" textAlign='center'>{ConfigName}</Header>
             <Header as="h4" textAlign='center'>{ConfigDescription}</Header>
-            <DimmerDimmable as={Segment} textAlign="left" padded='very' loading={active} dimmed={active} blurring>               
-                <List size="large" verticalAlign='middle'>
+            <DimmerDimmable as={Segment} textAlign="left" padded='very' loading={active} dimmed={active} blurring>
+                { APIData.length ? <List size="large" verticalAlign='middle'>
                     {APIData.map((objet) => {
                         return (
                             <ObjetsList key={objet.id} objet={objet} deleteObjet={openDeleteModal} />
@@ -73,7 +70,7 @@ export default function ReadRootList() {
                     }
                     )
                     }
-                </List>
+                </List>  : <Header textAlign='center'>Aucun objet existant.</Header> }
             </DimmerDimmable>
             <Button as={Link} to={`create`} color='green'>Nouvel objet</Button>
             <DeleteModal open={openModal} setOpen={setOpenModal} element={currentObject} deleteElement={deleteObject} />

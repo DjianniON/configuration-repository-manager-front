@@ -23,7 +23,6 @@ export default function ReadConfigList() {
         getData();
     }, [])
 
-    //@TODO: FIX LES REQUETES
     const getData = () => {
         setActive(true);
         axios.get(`http://localhost:8080/api/v1/referentiel/${referentiel}`, {
@@ -100,7 +99,8 @@ export default function ReadConfigList() {
             menuItem: 'Liste des configurations',
             render: () => <Tab.Pane attached={false} as={Container} loading={active}>
                 <Header as="h1">Liste des configurations de {refNom}</Header>
-                <ReadList configurations={referentielConfigs} type="Configuration" links="configurations/" deleteElement={openDeleteModal} export={exportConfiguration} active={active} />
+                {referentielConfigs.length ? <ReadList configurations={referentielConfigs} type="Configuration" links="configurations/" deleteElement={openDeleteModal} export={exportConfiguration} active={active} />
+                    : <Header textAlign='center'>Aucune configuration existante.</Header>}
                 <Link to="configurations/create"><Button color='green'>Nouvelle configuration</Button></Link>
             </Tab.Pane>,
         },
@@ -109,7 +109,7 @@ export default function ReadConfigList() {
             render: () => <Tab.Pane attached={false} as={Container}>
                 <Header as="h1">Modèle d'objets de {refNom}</Header>
                 <DimmerDimmable as={Segment} textAlign="left" padded='very' loading={active} dimmed={active} blurring>
-                    <List size="large" verticalAlign='middle'>
+                    {referentielObjets.length ? <List size="large" verticalAlign='middle'>
                         {referentielObjets.map((objet) => {
                             return (
                                 <ObjetsList key={objet.id} objet={objet} deleteObjet={openDeleteObjetModal} />
@@ -118,6 +118,7 @@ export default function ReadConfigList() {
                         )
                         }
                     </List>
+                        : <Header textAlign='center'>Aucun objet existant.</Header>}
                 </DimmerDimmable>
                 <Button as={Link} to={`objets/create`} color='green'>Nouvel objet</Button>
             </Tab.Pane>,
@@ -127,8 +128,7 @@ export default function ReadConfigList() {
     return (
         <Container>
             <ContextMenu nom={refNom} />
-
-            <Tab menu={{ secondary: true, pointing: true  }} panes={panes} />
+            <Tab menu={{ secondary: true, pointing: true }} panes={panes} />
             <DeleteModal open={openModal} setOpen={setOpenModal} element={currentElement} deleteElement={isConfig ? deleteConfiguration : deleteObjet} />
         </Container>
     )
