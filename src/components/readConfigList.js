@@ -32,8 +32,8 @@ export default function ReadConfigList() {
         })
             .then((response) => {
                 setRefNom(response.data.nom);
-                getConfigData();
-                getObjetsData();
+                setreferentielConfigs(response.data.configurations);
+                setreferentielObjets(response.data.objets);
                 setActive(false);
             })
     }
@@ -97,7 +97,7 @@ export default function ReadConfigList() {
     const panes = [
         {
             menuItem: 'Liste des configurations',
-            render: () => <Tab.Pane attached={false} as={Container} loading={active}>
+            render: () => <Tab.Pane attached="false" as={Container} loading={active}>
                 <Header as="h1">Liste des configurations de {refNom}</Header>
                 {referentielConfigs.length ? <ReadList configurations={referentielConfigs} type="Configuration" links="configurations/" deleteElement={openDeleteModal} export={exportConfiguration} active={active} />
                     : <Header textAlign='center'>Aucune configuration existante.</Header>}
@@ -106,7 +106,7 @@ export default function ReadConfigList() {
         },
         {
             menuItem: 'Modèle d\'objets',
-            render: () => <Tab.Pane attached={false} as={Container}>
+            render: () => <Tab.Pane attached="false" as={Container}>
                 <Header as="h1">Modèle d'objets de {refNom}</Header>
                 <DimmerDimmable as={Segment} textAlign="left" padded='very' loading={active} dimmed={active} blurring>
                     {referentielObjets.length ? <List size="large" verticalAlign='middle'>
